@@ -1857,12 +1857,12 @@ bool DynTree::getJacobianKDL(const int link_index, KDL::Jacobian & abs_jac, bool
         //in kdl_codyco the velocity of the base twist is expressed in the base frame
         KDL::Frame H_link_world = (world_base_frame*X_dynamic_base[link_index]).Inverse();
 
-        abs_jac.setColumn(0,H_link_world*KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)));
-        abs_jac.setColumn(1,H_link_world*KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)));
-        abs_jac.setColumn(2,H_link_world*KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)));
-        abs_jac.setColumn(3,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)));
-        abs_jac.setColumn(4,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)));
-        abs_jac.setColumn(5,H_link_world*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)));
+        abs_jac.setColumn(0,H_link_world.M*KDL::Twist(KDL::Vector(1,0,0),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(1,H_link_world.M*KDL::Twist(KDL::Vector(0,1,0),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(2,H_link_world.M*KDL::Twist(KDL::Vector(0,0,1),KDL::Vector(0,0,0)));
+        abs_jac.setColumn(3,H_link_world.M*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(1,0,0)));
+        abs_jac.setColumn(4,H_link_world.M*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,1,0)));
+        abs_jac.setColumn(5,H_link_world.M*KDL::Twist(KDL::Vector(0,0,0),KDL::Vector(0,0,1)));
     }
 
     return true;
