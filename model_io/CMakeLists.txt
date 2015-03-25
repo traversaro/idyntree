@@ -110,7 +110,7 @@ include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
 
 add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${IDYNTREE_MODEL_IO_HEADERS} ${IKIN_SRCS})
 
-target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
+target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
 
 if(ENABLE_SYMORO_PAR)
     target_link_libraries(idyntree-model-io expression-parser)

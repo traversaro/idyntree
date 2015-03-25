@@ -162,8 +162,10 @@ void DynTree::constructor(const KDL::Tree & _tree,
     ret = buildSubGraphStructure(joint_sensor_names);
     if( ret != 0 ) { std::cerr << "iDynTree constructor: ft sensor specified not found" << std::endl; }
 
+#ifdef ICUB_FOUND
     //building matrix and vectors for each subgraph
     contacts.resize(NrOfDynamicSubGraphs);
+#endif
     A_contacts.resize(NrOfDynamicSubGraphs);
     b_contacts.resize(NrOfDynamicSubGraphs,Vector(6,0.0));
     x_contacts.resize(NrOfDynamicSubGraphs);
@@ -383,6 +385,7 @@ iDynTreeLinkAndFrame DynTree::getiDynTreeLinkFrameFromSkinDynLibID(int body_part
     return error_id;
 }*/
 
+#ifdef ICUB_FOUND
 void DynTree::buildAb_contacts()
 {
 //    #ifndef NDEBUG
@@ -656,6 +659,7 @@ void DynTree::store_contacts_results()
         }
     }
 }
+#endif
 
 //====================================
 //
@@ -1250,6 +1254,7 @@ yarp::sig::Vector DynTree::getExternalForceTorque(int link_index,
     return ret;
 }
 
+#ifdef ICUB_FOUND
 bool DynTree::setContacts(const iCub::skinDynLib::dynContactList & contacts_list)
 {
     assert((int)contacts.size() == NrOfDynamicSubGraphs);
@@ -1300,7 +1305,7 @@ const iCub::skinDynLib::dynContactList DynTree::getContacts() const
 
     return all_contacts;
 }
-
+#endif
 
 //====================================
 //
@@ -1345,6 +1350,7 @@ bool DynTree::kinematicRNEA()
     return true;
 }
 
+#ifdef ICUB_FOUND
 bool DynTree::estimateContactForcesFromSkin()
 {
     #ifndef NDEBUG
@@ -1377,6 +1383,7 @@ bool DynTree::estimateContactForcesFromSkin()
     are_contact_estimated = true;
     return true;
 }
+#endif
 
 void pseudoInverse(const Eigen::Matrix<double, 6, 6+6>& A,
                                                         double tol,

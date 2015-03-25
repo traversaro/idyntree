@@ -77,7 +77,10 @@
 
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
-#include <iCub/skinDynLib/dynContactList.h>
+
+#ifdef ICUB_FOUND
+    #include <iCub/skinDynLib/dynContactList.h>
+#endif
 
 #include <kdl_codyco/treeserialization.hpp>
 #include <kdl_codyco/undirectedtree.hpp>
@@ -192,8 +195,10 @@ class DynTree  {
 
         double setAng(const double q, const int i);
 
+#ifdef ICUB_FOUND
         //dynContact stuff
         std::vector< iCub::skinDynLib::dynContactList > contacts; /**< a vector of dynContactList, one for each dynamic subgraph */
+#endif
 
         //Sensors measures
         //std::vector< KDL::Wrench > measured_wrenches;
@@ -258,6 +263,7 @@ class DynTree  {
 
         std::vector<KDL::Wrench> b_contacts_subtree; /**< for each link, the b vector of known terms of the subtree starting at that link expressed in the link frame*/
 
+#ifdef ICUB_FOUND
         /**
          * Preliminary version. If there are performance issues, this function
          * has several space for improvement.
@@ -267,6 +273,7 @@ class DynTree  {
 
         /** store contacts results */
         void store_contacts_results();
+#endif
 
         /**
          * For a given link, returns the sum of the measured wrenches acting on the link (i.e. the sum of the wrenches acting
@@ -758,12 +765,15 @@ class DynTree  {
         */
         virtual bool kinematicRNEA();
 
+
+#ifdef ICUB_FOUND
         /**
         * Estimate the external contacts, supplied by the setContacts call
         * for each dynamical subtree
         *
         */
         virtual bool estimateContactForcesFromSkin();
+#endif
 
         bool estimateDoubleSupportContactForce(int left_foot_id, int right_foot_id);
 
@@ -886,6 +896,7 @@ class DynTree  {
         yarp::sig::Vector getExternalForceTorque(int link_index, int origin_frame_index, int orientation_frame_index);
 
         //@}
+#ifdef ICUB_FOUND
         /** @name Methods related to contact forces
         *  This methods are related both to input and output of the esimation:
         *  the iCub::skinDynLib::dynContactList is used both to specify the
@@ -912,7 +923,7 @@ class DynTree  {
         virtual const iCub::skinDynLib::dynContactList getContacts() const;
 
         //@}
-
+#endif
         //@}
         /** @name Methods related to Jacobian calculations
         *

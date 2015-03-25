@@ -22,10 +22,14 @@ include(iDynTreeOptions)
 
 # Find dependecies
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
+find_package(ICUB QUIET)
 include(OrocosKDLFindLogic)
 find_package(orocos_kdl REQUIRED)
 find_package(Eigen3 REQUIRED)
+
+if(ICUB_FOUND)
+    add_definitions(-DICUB_FOUND)
+endif(ICUB_FOUND)
 
 if (YARP_HAS_MATH_LIB)
     message(STATUS "found libYARP_math")

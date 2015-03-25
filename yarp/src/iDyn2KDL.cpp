@@ -9,12 +9,10 @@
 #include <kdl/frames.hpp>
 #include <kdl/chain.hpp>
 
-#include <iCub/iDyn/iDyn.h>
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 #include <yarp/sig/all.h>
 
-#include <iCub/ctrl/math.h>
 #include <iCub/ctrl/adaptWinPolyEstimator.h>
 #include <iCub/iDyn/iDynInv.h>
 #include <iCub/iDyn/iDynBody.h>

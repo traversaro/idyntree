@@ -9,7 +9,9 @@
  */
 
 #include "iCub/iDynTree/TorqueEstimationTree.h"
+#ifdef ICUB_FOUND
 #include "iCub/iDynTree/idyn2kdl_icub.h"
+#endif
 
 //Urdf import from kdl_format_io
 #include <kdl_format_io/urdf_import.hpp>

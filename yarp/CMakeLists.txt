@@ -4,11 +4,18 @@
 
 project(iDynTree_YARP CXX)
 
+FIND_PACKAGE(ICUB QUIET)
+
+IF(ICUB_FOUND)
+  set(IDYN_ICUB_SRC  src/iDyn2KDL.cpp
+                     src/idyn2kdl_icub.cpp)
+  set(IDYN_ICUB_LIBS skinDynLib iKin iDyn)
+endif()
+
 SET(iDynTree_YARP_source src/DynTree.cpp
                          src/yarp_kdl.cpp
                          src/TorqueEstimationTree.cpp
-                         src/iDyn2KDL.cpp
-                         src/idyn2kdl_icub.cpp)
+                         ${IDYN_ICUB_SRC})
 
 SET(iDynTree_YARP_header include/iCub/iDynTree/DynTree.h
                   include/iCub/iDynTree/yarp_kdl.h
@@ -55,7 +62,7 @@ target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
                                             ${kdl_format_io_INCLUDE_DIRS})
 
 
-target_link_libraries(idyntree-yarp LINK_PUBLIC  skinDynLib iKin iDyn
+target_link_libraries(idyntree-yarp LINK_PUBLIC ${IDYN_ICUB_LIBS}
                                             ${GSL_LIBRARIES}
                                             ${YARP_LIBRARIES}
                                             idyntree-core
