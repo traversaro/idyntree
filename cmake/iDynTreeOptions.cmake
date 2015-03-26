@@ -1,11 +1,7 @@
-
-
-
 #########################################################################
 # Control whether libraries are shared or static.
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 set(BUILD_SHARED_LIBS ${IDYNTREE_SHARED_LIBRARY})
-
 
 #########################################################################
 # Use position indipendent code
