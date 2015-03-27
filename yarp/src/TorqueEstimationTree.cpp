@@ -21,6 +21,7 @@
 
 #include "kdl_codyco/six_axis_ft_sensor.hpp"
 #include "kdl_codyco/position_loops.hpp"
+#include "kdl_codyco/rnea_loops.hpp"
 
 
 #include "yarp_kdl.h"
@@ -955,6 +956,60 @@ bool TorqueEstimationTree::skinDynLib2iDynTree(const int skinDynLib_body_part,
     iDynTree_frame_index = it->second.frame_index;
 
     return true;
+}
+
+
+bool TorqueEstimationTree::dynamicRNEA()
+{
+    int ret;
+    ret = KDL::CoDyCo::rneaDynamicLoop(undirected_tree,q,dynamic_traversal,f_gi,f_ext,f,torques,base_residual_f);
+    //Check base force: if estimate contact was called, it should be zero
+    if( are_contact_estimated == true )
+    {
+        //If the force were estimated wright
+        #ifndef NDEBUG
+        /*
+        std::cout << "q:   " << q.data << std::endl;
+        std::cout << "dq:  " << dq.data << std::endl;
+        std::cout << "ddq: " << ddq.data << std::endl;
+        for(int i=0; i < f_ext.size(); i++ ) { std::cout << "f_ext[" << i << "]: " << f_ext[i] << std::endl; }
+        */
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.force.Norm() << std::endl;
+        //std::cerr << "base_residual_f.force.Norm " << base_residual_f.torque.Norm() << std::endl;
+
+        #endif
+        if(  base_residual_f.force.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.force.Norm() is " << base_residual_f.force.Norm() << " instead of zero." << std::endl;
+        }
+        if(  base_residual_f.torque.Norm() > 1e-5 )
+        {
+            std::cout << "iDynTree WARNING: base_residual_f.torque.Norm() is " << base_residual_f.torque.Norm() << " instead of zero." << std::endl;
+        }
+        //Note: this (that no residual appears happens only for the proper selection of the provided dynContactList
+    }
+    else
+    {
+        //In case contacts forces where not estimated, the sensor values have
+        //to be calculated from the RNEA
+        for(int i=0; i < NrOfFTSensors; i++ )
+        {
+            //Todo add case that the force/wrench is the one of the parent ?
+            KDL::Wrench measure_wrench;
+
+            KDL::CoDyCo::SixAxisForceTorqueSensor * p_ft_sensor =
+                reinterpret_cast<KDL::CoDyCo::SixAxisForceTorqueSensor *>(sensors_tree.getSensor(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i));
+
+            bool ok = p_ft_sensor->simulateMeasurement(dynamic_traversal,f,measure_wrench);
+
+            assert(ok);
+
+            ok = sensor_measures.setMeasurement(KDL::CoDyCo::SIX_AXIS_FORCE_TORQUE,i,measure_wrench);
+
+            assert(ok);
+        }
+    }
+    return ret >= 0;
 }
 
 }
