@@ -267,6 +267,22 @@ int main(int argc, char** argv)
         }
     }
 
+    ////////////////////////////////////////////////////////////////////
+    // Try the RNEA algorithm (quick test)
+    ////////////////////////////////////////////////////////////////////
+    bool ok;
+    ok = icub_idyntree.kinematicRNEA();
+    ok = ok && icub_idyntree.dynamicRNEA();
+
+    if( !ok )
+    {
+        std::cout << "RNEA steps failed" << std::endl;
+    }
+    else
+    {
+        std::cout << "RNEA step successfull" << std::endl;
+    }
+
 
     return 0;
 

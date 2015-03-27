@@ -81,7 +81,6 @@ private:
     std::vector<int> link2subgraph_index; /**< for each link, return the correspondent dynamics subgraph index */
     std::vector<bool> link_is_subgraph_root; /**< for each link, return if it is a subgraph root */
     std::vector<int> subgraph_index2root_link; /**< for each subgraph, return the index of the root */
-    bool are_contact_estimated;
 
     //Map for correctly deal with skinDynLib IDs
     std::map<skinDynLibLinkID,iDynTreeLinkAndFrame> skinDynLibLinkMap;
@@ -205,6 +204,9 @@ private:
      *
      */
     virtual bool estimateContactForcesFromSkin();
+
+    virtual bool dynamicRNEA();
+
 
     //@}
 
