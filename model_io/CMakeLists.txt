@@ -43,7 +43,6 @@ include_directories(include/kdl_format_io)
 
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
-# link_directories(${kdl_codyco_LIBRARY_DIRS})
 
 if(ENABLE_URDF)
     include_directories(SYSTEM ${TinyXML_INCLUDE_DIRS})
@@ -106,11 +105,14 @@ endif()
 set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/include")
 
 include_directories(SYSTEM ${orocos_kdl_INCLUDE_DIRS})
-include_directories(SYSTEM ${kdl_codyco_INCLUDE_DIRS})
 
 add_library(idyntree-model-io ${LIB_TYPE} ${URDF_SRCS} ${SYMORO_PAR_SRCS} ${IDYNTREE_MODEL_IO_HEADERS} ${IKIN_SRCS})
 
+if(IDYNTREE_USE_ICUB_MAIN)
 target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES} iKin)
+elseif()
+target_link_libraries(idyntree-model-io idyntree-core ${TinyXML_LIBRARIES} ${URDF_LIBS} ${orocos_kdl_LIBRARIES})
+endif()
 
 if(ENABLE_SYMORO_PAR)
     target_link_libraries(idyntree-model-io expression-parser)

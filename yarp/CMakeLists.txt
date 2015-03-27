@@ -40,9 +40,7 @@ target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURC
                                            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${${VARS_PREFIX}_INSTALL_INCLUDEDIR}>"
                                             ${GSL_INCLUDE_DIRS}
                                             ${YARP_INCLUDE_DIRS}
-                                            ${kdl_codyco_INCLUDE_DIRS}
-                                            ${EIGEN3_INCLUDE_DIR}
-                                            ${kdl_format_io_INCLUDE_DIRS})
+                                            ${EIGEN3_INCLUDE_DIR})
 
 
 target_link_libraries(idyntree-yarp LINK_PUBLIC
