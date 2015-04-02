@@ -159,11 +159,8 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
             std::string ft_sens_name = ft_sensors[ft_sens].reference_joint;
             std::size_t ft_sens_id;
 
-            std::cout << "ft_sens" << ft_sens << std::endl;
-
             if( ft_serialization[serialization_id] == ft_sens_name)
             {
-                std::cout << "Found ft sensor " << ft_sens_name << " in urdf " << std::endl;
                 ft_sens_id = serialization_id;
 
                 ft_names[ft_sens_id] = ft_sens_name;
@@ -190,9 +187,6 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
         }
     }
 
-        std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << dof_serialization.size()
-              << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
-
     //Define an explicit serialization of the links and the DOFs of the iCub
     //The DOF serialization done in icub_kdl construction is ok
     KDL::CoDyCo::TreeSerialization serial = KDL::CoDyCo::TreeSerialization(icub_kdl);
@@ -211,7 +205,6 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
         for(std::size_t dof=0; dof < dof_serialization.size(); dof++)
         {
             std::string dof_string = dof_serialization[dof];
-            std::cout << "[DEBUG] TorqueEstimationTree: Setting id of dof " << dof_string << " to " << dof << std::endl;
             serial.setDOFNameID(dof_string, (int)dof);
             serial.setJunctionNameID(dof_string, (int)dof);
         }
@@ -240,8 +233,8 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
 
     //end iDynTreeContact
 
-    std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
-              << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
+    //std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
+    //          << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
 
     assert(this->getNrOfDOFs() > 0);
 
