@@ -233,9 +233,6 @@ void TorqueEstimationTree::TorqueEstimationConstructor(KDL::Tree & icub_kdl,
 
     //end iDynTreeContact
 
-    //std::cerr << "[INFO] TorqueEstimationTree constructor: loaded urdf with " << this->getNrOfDOFs()
-    //          << "dofs and " << ft_names.size() << " fts ( " << ft_serialization.size() <<  ") " << std::endl;
-
     assert(this->getNrOfDOFs() > 0);
 
 
