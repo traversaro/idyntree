@@ -40,7 +40,12 @@ namespace iDynTree
     {
     private:
         RotationSemantics semantics;
-
+        
+        /**
+         * Copy constructor: create a Rotation from another RotationRaw and another RotationSemantics.
+         */
+        Rotation(const RotationRaw & other, RotationSemantics & semantics);
+        
     public:
         /**
          * Default constructor: initialize all the rotation to the identity
@@ -60,7 +65,7 @@ namespace iDynTree
         Rotation(const RotationRaw & other);
 
         /**
-         * Copy constructor: create a Rotation from another RotationRaw.
+         * Copy constructor: create a Rotation from another Rotation.
          */
         Rotation(const Rotation & other);
 
@@ -79,15 +84,21 @@ namespace iDynTree
          */
         const RotationSemantics& getSemantics() const;
 
+        /**
+         * Geometric operation.
+         * For the inverse2() operation, both the forward and the inverse geometric relations have to
+         * be expressed in the reference orientation frame!!
+         * 
+         */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
         static Rotation compose(const Rotation & op1, const Rotation & op2);
+        static Position compose(const Rotation & op1, const Position & op2);
         static Rotation inverse2(const Rotation & orient);
-        static Position transform(const Rotation & op1, const Position & op2);
-
+    
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
-        Rotation inverse() const;
+        Rotation operator-() const;
         Position operator*(const Position & op2) const;
 
         /** @name Output helpers.

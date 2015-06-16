@@ -36,7 +36,12 @@ namespace iDynTree
     {
     private:
         PositionSemantics semantics;
-
+        
+        /**
+         * Copy constructor: create a Position from a PositionRaw and a PositionSemantics object.
+         */
+        Position(const PositionRaw & otherPos, const PositionSemantics & otherSem);
+        
     public:
         /**
          * Default constructor: initialize all the coordinates to 0
@@ -73,6 +78,9 @@ namespace iDynTree
          */
         const PositionSemantics& getSemantics() const;
 
+        /**
+         * Geometric operations
+         */
         const Position & changePoint(const Position & newPoint);
         const Position & changeRefPoint(const Position & newRefPoint);
         static Position compose(const Position & op1, const Position & op2);

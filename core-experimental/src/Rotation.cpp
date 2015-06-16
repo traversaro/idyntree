@@ -37,6 +37,11 @@ namespace iDynTree
 
     }
 
+    Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & otherSem): RotationRaw(otherPos)
+    {
+        this->semantics = otherSem;
+    }
+
     Rotation::~Rotation()
     {
     }
@@ -53,65 +58,36 @@ namespace iDynTree
 
     const Rotation& Rotation::changeOrientFrame(const Rotation& newOrientFrame)
     {
-        if( semantics.check_changeOrientFrame(newOrientFrame.getSemantics()) )
-        {
-            RotationRaw::changeOrientFrame(newOrientFrame);
-            semantics.changeOrientFrame(newOrientFrame.getSemantics());
-        }
-
-        return *this;
+        assert( this->semantics.changeOrientFrame(newOrientFrame.semantics) );
+        return this->RotationRaw::changeOrientFrame(newOrientFrame);
     }
 
     const Rotation& Rotation::changeRefOrientFrame(const Rotation& newRefOrientFrame)
     {
-        if( semantics.check_changeRefOrientFrame(newRefOrientFrame.getSemantics()) )
-        {
-            RotationRaw::changeRefOrientFrame(newRefOrientFrame);
-            semantics.changeRefOrientFrame(newRefOrientFrame.getSemantics());
-        }
-
-        return *this;
+        assert( semantics.changeRefOrientFrame(newRefOrientFrame.semantics) );
+        return this->RotationRaw::changeRefOrientFrame(newRefOrientFrame);
     }
 
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
-        Rotation result;
+        RotationSemantics resultSemantics;
+        assert( RotationSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
+        return Rotation(RotationRaw::compose(op1,op2),resultSemantics);
+    }
 
-        if( RotationSemantics::check_compose(op1.getSemantics(),op2.getSemantics()) )
-        {
-            result = RotationRaw::compose(op1,op2);
-            RotationSemantics::compose(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
-        }
-
-        return result;
+    Position Rotation::compose(const Rotation& op1, const Position& op2)
+    {
+        RotationSemantics resultSemantics;
+        assert( RotationSemantics::compose(op1.getSemantics(),op2.getSemantics(),resultSemantics) );
+        return RotationRaw::transform(op1,op2),resultSemantics);
     }
 
     Rotation Rotation::inverse2(const Rotation& orient)
     {
-        Rotation result;
-
-        if( RotationSemantics::check_inverse2(orient.getSemantics()) )
-        {
-            result = RotationRaw::inverse2(orient);
-            RotationSemantics::inverse2(orient.getSemantics(),result.getSemantics());
-        }
-
-        return result;
+        RotationSemantics resultSemantics;
+        assert( RotationSemantics::inverse2(orient.getSemantics(),resultSemantics) );
+        return Rotation(RotationRaw::inverse2(orient),resultSemantics);
     }
-
-    Position Rotation::transform(const Rotation& op1, const Position& op2)
-    {
-        Position result;
-
-        if( RotationSemantics::check_transform(op1.getSemantics(),op2.getSemantics()) )
-        {
-            result = RotationRaw::transform(op1,op2);
-            RotationSemantics::transform(op1.getSemantics(),op2.getSemantics(),result.getSemantics());
-        }
-
-        return result;
-    }
-
 
     Rotation Rotation::inverse() const
     {
@@ -125,7 +101,7 @@ namespace iDynTree
 
     Position Rotation::operator*(const Position& op) const
     {
-        return transform(*this,op);
+        return compose(*this,op);
     }
 
     std::string Rotation::toString() const

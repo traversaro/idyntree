@@ -24,6 +24,18 @@ namespace iDynTree
         int refPoint;
         int coordinateFrame;
 
+        /**
+         * @name Semantics checkers
+         * Check if a given operation is possible or not, given the semantics of the operators.
+         */
+        ///@{
+        bool check_changePoint(const PositionSemantics & newPoint);
+        bool check_changeRefPoint(const PositionSemantics & newRefPoint);
+        static bool check_compose(const PositionSemantics & op1, const PositionSemantics & op2);
+        static bool check_inverse(const PositionSemantics & op);
+        ///@}
+        
+
     public:
         /**
          * Default constructor: initialize all semantics to unknown;
@@ -60,24 +72,10 @@ namespace iDynTree
          void setCoordinateFrame(int _coordinateFrame);
         ///@}
 
-        /**
-         * @name Semantics checkers
-         * Check if a given operation is possible or not, given the semantics of the operators.
-         */
-        ///@{
-        bool check_changePoint(const PositionSemantics & newPoint);
-        bool check_changeRefPoint(const PositionSemantics & newRefPoint);
-        static bool check_compose(const PositionSemantics & op1, const PositionSemantics & op2);
-        static bool check_inverse(const PositionSemantics & op);
-        ///@}
-
-        const PositionSemantics & changePoint(const PositionSemantics & newPoint);
-        const PositionSemantics & changeRefPoint(const PositionSemantics & newRefPoint);
-
-        static PositionSemantics compose(const PositionSemantics & op1, const PositionSemantics & op2);
-        static void compose(const PositionSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
-        static PositionSemantics inverse(const PositionSemantics & op);
-        static void inverse(const PositionSemantics & op, PositionSemantics & result);
+        bool changePoint(const PositionSemantics & newPoint);
+        bool changeRefPoint(const PositionSemantics & newRefPoint);
+        static bool compose(const PositionSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
+        static bool inverse(const PositionSemantics & op, PositionSemantics & result);
 
         /** @name Output helpers.
          *  Output helpers.

@@ -13,6 +13,8 @@
 
 namespace iDynTree
 {
+    // For all the constructors and functions below, checking the semantics while debugging
+    // should always be done before the actual composition.
 
     Position::Position(): PositionRaw()
     {
@@ -31,7 +33,11 @@ namespace iDynTree
     {
 
     }
-
+    
+    Position::Position(const PositionRaw & otherPos, const PositionSemantics & otherSem): PositionRaw(otherPos)
+    {
+        this->semantics = otherSem;
+    }
 
     Position::~Position()
     {
@@ -50,52 +56,29 @@ namespace iDynTree
 
     const Position& Position::changePoint(const Position& newPoint)
     {
-        if( semantics.check_changePoint(newPoint.semantics) )
-        {
-            PositionRaw::changePoint(newPoint);
-            this->semantics.changePoint(newPoint.semantics);
-        }
-
-        return *this;
+        assert( this->semantics.changePoint(newPoint.semantics) );
+        return this->PositionRaw::changePoint(newPoint);
     }
 
-    const Position& Position::changeRefPoint(const Position& newPosition)
+    const Position& Position::changeRefPoint(const Position& newRefPoint)
     {
-        if( semantics.check_changeRefPoint(newPosition.semantics) )
-        {
-            PositionRaw::changeRefPoint(newPosition);
-            this->semantics.changeRefPoint(newPosition.semantics);
-        }
-
-        return *this;
+        assert( this->semantics.changeRefPoint(newRefPoint.semantics) );
+        return this->PositionRaw::changeRefPoint(newRefPoint);
     }
 
     Position Position::compose(const Position& op1, const Position& op2)
     {
-        Position result;
-
-        if( PositionSemantics::check_compose(op1.semantics,op2.semantics) )
-        {
-            result = PositionRaw::compose(op1,op2);
-            PositionSemantics::compose(op1.semantics,op2.semantics,result.semantics);
-        }
-
-        return result;
+        PositionSemantics resultSemantics;
+        assert( PositionSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
+        return Position(PositionRaw::compose(op1,op2),resultSemantics);
     }
 
 
     Position Position::inverse(const Position& op)
     {
-        Position result;
-
-        if( PositionSemantics::check_inverse(op.semantics) )
-        {
-            result = PositionRaw::inverse(op);
-            PositionSemantics::inverse(op.semantics,result.semantics);
-        }
-
-        return result;
-
+        PositionSemantics resultSemantics;
+        assert( PositionSemantics::inverse(op.semantics,resultSemantics) );
+        return Position(PositionRaw::inverse(op),resultSemantics);
     }
 
     // overloaded operators
