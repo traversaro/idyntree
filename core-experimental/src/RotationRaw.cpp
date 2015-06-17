@@ -128,6 +128,19 @@ namespace iDynTree
         return *this;
     }
     
+    PositionRaw RotationRaw::convertToNewCoordFrame(const PositionRaw & op) const
+    {
+        PositionRaw result;
+        
+        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(privateData);
+        Eigen::Map<const Eigen::Vector3d> positionCoord(op.data());
+        Eigen::Map<Eigen::Vector3d> resultData(result.data());
+        
+        resultData = newCoordFrame*positionCoord;
+        
+        return result;
+    }
+    
     RotationRaw RotationRaw::compose(const RotationRaw& op1, const RotationRaw& op2)
     {
         RotationRaw result;
@@ -135,19 +148,6 @@ namespace iDynTree
         Eigen::Map<const Matrix3dRowMajor> op1Data(op1.privateData);
         Eigen::Map<const Matrix3dRowMajor> op2Data(op2.privateData);
         Eigen::Map<Matrix3dRowMajor> resultData(result.privateData);
-        
-        resultData = op1Data*op2Data;
-        
-        return result;
-    }
-    
-    PositionRaw RotationRaw::compose(const RotationRaw& op1, const PositionRaw& op2)
-    {
-        PositionRaw result;
-        
-        Eigen::Map<const Matrix3dRowMajor> op1Data(op1.privateData);
-        Eigen::Map<const Eigen::Vector3d> op2Data(op2.data());
-        Eigen::Map<Eigen::Vector3d> resultData(result.data());
         
         resultData = op1Data*op2Data;
         
@@ -164,6 +164,21 @@ namespace iDynTree
         resultData = orientData.transpose();
         
         return result;
+    }
+    
+    RotationRaw RotationRaw::inverse() const
+    {
+        return RotationRaw::inverse2(*this);
+    }
+    
+    RotationRaw RotationRaw::operator*(const RotationRaw& other) const
+    {
+        return compose(*this,other);
+    }
+    
+    PositionRaw RotationRaw::operator*(const PositionRaw& other) const
+    {
+        return convertToNewCoordFrame(other);
     }
     
     RotationRaw RotationRaw::RotX(const double angle)

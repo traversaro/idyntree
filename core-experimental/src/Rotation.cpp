@@ -59,27 +59,29 @@ namespace iDynTree
     const Rotation& Rotation::changeOrientFrame(const Rotation& newOrientFrame)
     {
         assert( this->semantics.changeOrientFrame(newOrientFrame.semantics) );
-        return this->RotationRaw::changeOrientFrame(newOrientFrame);
+        this->RotationRaw::changeOrientFrame(newOrientFrame);
+        return *this;
     }
 
     const Rotation& Rotation::changeRefOrientFrame(const Rotation& newRefOrientFrame)
     {
-        assert( semantics.changeRefOrientFrame(newRefOrientFrame.semantics) );
-        return this->RotationRaw::changeRefOrientFrame(newRefOrientFrame);
+        assert( this->semantics.changeRefOrientFrame(newRefOrientFrame.semantics) );
+        this->RotationRaw::changeRefOrientFrame(newRefOrientFrame);
+        return *this;
     }
 
+    Position Rotation::convertToNewCoordFrame(const Position & op) const
+    {
+        PositionSemantics resultSemantics;
+        assert( this->semantics.convertToNewCoordFrame(op.getSemantics(), resultSemantics) );
+        return Position(this->RotationRaw::convertToNewCoordFrame(op), resultSemantics);
+    }
+    
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
         RotationSemantics resultSemantics;
         assert( RotationSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
         return Rotation(RotationRaw::compose(op1,op2),resultSemantics);
-    }
-
-    Position Rotation::compose(const Rotation& op1, const Position& op2)
-    {
-        RotationSemantics resultSemantics;
-        assert( RotationSemantics::compose(op1.getSemantics(),op2.getSemantics(),resultSemantics) );
-        return RotationRaw::transform(op1,op2),resultSemantics);
     }
 
     Rotation Rotation::inverse2(const Rotation& orient)
@@ -89,19 +91,19 @@ namespace iDynTree
         return Rotation(RotationRaw::inverse2(orient),resultSemantics);
     }
 
-    Rotation Rotation::inverse() const
-    {
-        return Rotation::inverse2(*this);
-    }
-
     Rotation Rotation::operator*(const Rotation& other) const
     {
         return compose(*this,other);
     }
 
-    Position Rotation::operator*(const Position& op) const
+    Rotation Rotation::operator-() const
     {
-        return compose(*this,op);
+        return inverse2(*this);
+    }
+    
+    Position Rotation::operator*(const Position& other) const
+    {
+        return convertToNewCoordFrame(other);
     }
 
     std::string Rotation::toString() const

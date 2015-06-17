@@ -92,14 +92,14 @@ namespace iDynTree
          */
         const Rotation & changeOrientFrame(const Rotation & newOrientFrame);
         const Rotation & changeRefOrientFrame(const Rotation & newRefOrientFrame);
+        Position convertToNewCoordFrame(const Position & op) const;
         static Rotation compose(const Rotation & op1, const Rotation & op2);
-        static Position compose(const Rotation & op1, const Position & op2);
         static Rotation inverse2(const Rotation & orient);
     
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
         Rotation operator-() const;
-        Position operator*(const Position & op2) const;
+        Position operator*(const Position & other) const;
 
         /** @name Output helpers.
          *  Output helpers.

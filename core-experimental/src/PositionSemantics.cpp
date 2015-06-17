@@ -6,6 +6,7 @@
  */
 
 #include "PositionSemantics.h"
+#include "RotationSemantics.h"
 #include "Utils.h"
 #include <cstdio>
 #include <sstream>
@@ -129,7 +130,28 @@ namespace iDynTree
         return status;
     }
 
+    bool PositionSemantics::check_changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
+    {
+        if( !checkEqualOrUnknown(newCoordinateFrame.getOrientationFrame(),this->coordinateFrame) )
+        {
+            fprintf(stderr,"[ERROR] Position::changeCoordinateFrame error: transformation's orientationFrame is different from current coordinateFrame\n");
+            return false;
+        }
+        
+        return true;
+    }
 
+    bool PositionSemantics::changeCoordinateFrame(const RotationSemantics & newCoordinateFrame)
+    {
+        // check semantics
+        bool status = this->check_changeCoordinateFrame(newCoordinateFrame);
+        
+        // set new semantics
+        this->coordinateFrame = newCoordinateFrame.getCoordinateFrame();
+        
+        return status;
+    }
+    
     bool PositionSemantics::check_compose(const PositionSemantics& op1, const PositionSemantics& op2)
     {
         // check semantics

@@ -86,11 +86,16 @@ namespace iDynTree
 
         const RotationRaw & changeOrientFrame(const RotationRaw & newOrientFrame);
         const RotationRaw & changeRefOrientFrame(const RotationRaw & newRefOrientFrame);
+        PositionRaw convertToNewCoordFrame(const PositionRaw & op) const;
         static RotationRaw compose(const RotationRaw & op1, const RotationRaw & op2);
-        static PositionRaw compose(const RotationRaw & op1, const PositionRaw & op2);
         static RotationRaw inverse2(const RotationRaw & orient);
-
-
+        
+        
+        /** overloaded operators **/
+        RotationRaw operator*(const RotationRaw & other) const;
+        RotationRaw inverse() const;
+        PositionRaw operator*(const PositionRaw & other) const;
+        
         /** @name Output helpers.
          *  Output helpers.
          */

@@ -67,7 +67,6 @@ namespace iDynTree
     
     bool RotationSemantics::check_changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
-        // check semantics
         if( !checkEqualOrUnknown(this->orientationFrame,newOrientFrame.getReferenceOrientationFrame()) )
         {
             std::cerr << "[ERROR] RotationSemantics::changeOrientFrame : the orientationFrame of this object does not match the referenceOrientationFrame of the newOrientFrame\n";
@@ -79,13 +78,23 @@ namespace iDynTree
 
     bool RotationSemantics::check_changeRefOrientFrame(const RotationSemantics& newRefOrientFrame)
     {
-        // check semantics
         if( !checkEqualOrUnknown(newRefOrientFrame.getOrientationFrame(),this->refOrientationFrame) )
         {
             std::cerr << "[ERROR] RotationSemantics::changeRefOrientFrame : the refOrientationFrame of this object does not match the orientationFrame of the newRefOrientFrame\n";
             return false;
         }
 
+        return true;
+    }
+
+    bool RotationSemantics::check_convertToNewCoordFrame(const PositionSemantics & op) const
+    {
+        if( !checkEqualOrUnknown(this->orientationFrame,op.getCoordinateFrame()) )
+        {
+            fprintf(stderr,"[ERROR] Position::convertToNewCoordFrame error: transformation's orientationFrame is different from current Position's coordinateFrame\n");
+            return false;
+        }
+        
         return true;
     }
 
@@ -106,23 +115,10 @@ namespace iDynTree
         return true;
     }
 
-    bool RotationSemantics::check_transform(const RotationSemantics& op1, const PositionSemantics& op2)
-    {
-        // check semantics
-        if( !checkEqualOrUnknown(op1.getOrientationFrame(),op2.getCoordinateFrame() ) )
-        {
-            std::cerr << "[ERROR] RotationSemantics::apply : the orientationFrame of the Rotation does not match the coordinateFrame of the position\n";
-            return false;
-        }
-
-        return true;
-    }
-
-
     bool RotationSemantics::changeOrientFrame(const RotationSemantics& newOrientFrame)
     {
         // check semantics
-        bool status = RotationSemantics::check_changeOrientFrame(newOrientFrame);
+        bool status = this->check_changeOrientFrame(newOrientFrame);
         
         // set new semantics
         this->orientationFrame = newOrientFrame.orientationFrame;
@@ -133,7 +129,7 @@ namespace iDynTree
     bool RotationSemantics::changeRefOrientFrame(const RotationSemantics& newRefOrientFrame)
     {
         // check semantics
-        bool status = RotationSemantics::check_changeRefOrientFrame(newRefOrientFrame);
+        bool status = this->check_changeRefOrientFrame(newRefOrientFrame);
         
         // set new semantics
         this->refOrientationFrame = newRefOrientFrame.refOrientationFrame;
@@ -141,36 +137,33 @@ namespace iDynTree
         return status;
     }
 
+    bool RotationSemantics::convertToNewCoordFrame(const PositionSemantics & op, PositionSemantics & result) const
+    {
+        // check semantics
+        bool status = this->check_convertToNewCoordFrame(op);
+        
+        // set new semantics
+        result.setCoordinateFrame(this->getCoordinateFrame());
+        
+        return status;
+    }
+    
     bool RotationSemantics::compose(const RotationSemantics& op1, const RotationSemantics& op2, RotationSemantics& result)
     {
         // check semantics
-        bool status = RotationSemantics::check_compose(<#const iDynTree::RotationSemantics &op1#>, <#const iDynTree::RotationSemantics &op2#>);
+        bool status = RotationSemantics::check_compose(op1, op2);
         
         // set new semantics
         result.refOrientationFrame = op1.getReferenceOrientationFrame();
         result.orientationFrame    = op2.getOrientationFrame();
+        
+        return status;
     }
 
-    bool RotationSemantics::compose(const RotationSemantics& op1, const PositionSemantics& op2, PositionSemantics& result)
-    {
-        result.setCoordinateFrame(op1.getReferenceOrientationFrame());
-        result.setPoint(op2.getPoint());
-        result.setReferencePoint(op2.getReferencePoint());
-    }
-    
     bool RotationSemantics::inverse2(const RotationSemantics& op, RotationSemantics& result)
     {
         result.refOrientationFrame = op.getOrientationFrame();
         result.orientationFrame    = op.getReferenceOrientationFrame();
-    }
-
-    PositionSemantics RotationSemantics::transform(const RotationSemantics& op1, const PositionSemantics& op2)
-    {
-        PositionSemantics result;
-
-        RotationSemantics::transform(op1,op2,result);
-
-        return result;
     }
 
     std::string RotationSemantics::toString() const

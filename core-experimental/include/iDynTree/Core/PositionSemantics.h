@@ -12,6 +12,7 @@
 
 namespace iDynTree
 {
+    class RotationSemantics;
     /**
      * Class providing the semantics for iDynTree::Position class.
      *
@@ -31,6 +32,7 @@ namespace iDynTree
         ///@{
         bool check_changePoint(const PositionSemantics & newPoint);
         bool check_changeRefPoint(const PositionSemantics & newRefPoint);
+        bool check_changeCoordinateFrame(const RotationSemantics & newCoordinateFrame);
         static bool check_compose(const PositionSemantics & op1, const PositionSemantics & op2);
         static bool check_inverse(const PositionSemantics & op);
         ///@}
@@ -74,6 +76,7 @@ namespace iDynTree
 
         bool changePoint(const PositionSemantics & newPoint);
         bool changeRefPoint(const PositionSemantics & newRefPoint);
+        bool changeCoordinateFrame(const RotationSemantics & newCoordinateFrame);
         static bool compose(const PositionSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
         static bool inverse(const PositionSemantics & op, PositionSemantics & result);
 

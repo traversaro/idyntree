@@ -6,9 +6,15 @@
  */
 
 #include "PositionRaw.h"
+#include "RotationRaw.h"
 #include "Utils.h"
 #include <cstdio>
 #include <sstream>
+
+#include <Eigen/Dense>
+#include <Eigen/Geometry>
+
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 
 namespace iDynTree
 {
@@ -102,17 +108,23 @@ namespace iDynTree
         return *this;
     }
     
-    const PositionRaw& PositionRaw::changeRefPoint(const PositionRaw& newPosition)
+    const PositionRaw& PositionRaw::changeRefPoint(const PositionRaw& newRefPoint)
     {
-        this->m_data[0] += newPosition(0);
-        this->m_data[1] += newPosition(1);
-        this->m_data[2] += newPosition(2);
+        this->m_data[0] += newRefPoint(0);
+        this->m_data[1] += newRefPoint(1);
+        this->m_data[2] += newRefPoint(2);
         
         return *this;
     }
     
-    const PositionRaw & changeCoordinateFrame(const RotationRaw & newCoordinateFrame)
+    const PositionRaw& PositionRaw::changeCoordinateFrame(const RotationRaw & newCoordinateFrame)
     {
+        Eigen::Map<const Matrix3dRowMajor> newCoordFrame(newCoordinateFrame.data());
+        Eigen::Map<Eigen::Vector3d> positionCoord(this->data());
+        
+        positionCoord = newCoordFrame*positionCoord;
+        
+        return *this;
     }
     
     PositionRaw PositionRaw::compose(const PositionRaw& op1, const PositionRaw& op2)

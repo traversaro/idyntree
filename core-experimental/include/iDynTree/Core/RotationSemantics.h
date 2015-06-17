@@ -33,8 +33,8 @@ namespace iDynTree
         ///@{
         bool check_changeOrientFrame(const RotationSemantics & newOrientFrame);
         bool check_changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
+        bool check_convertToNewCoordFrame(const PositionSemantics & op) const;
         static bool check_compose(const RotationSemantics & op1, const RotationSemantics & op2);
-        static bool check_compose(const RotationSemantics & op1, const PositionSemantics & op2);
         static bool check_inverse2(const RotationSemantics & op);
         ///@}
         
@@ -79,9 +79,8 @@ namespace iDynTree
         ///@{
         bool changeOrientFrame(const RotationSemantics & newOrientFrame);
         bool changeRefOrientFrame(const RotationSemantics & newRefOrientFrame);
-        bool changeCoordinateFrame(const RotationSemantics & newCoordinateFrame);
+        bool convertToNewCoordFrame(const PositionSemantics & op, PositionSemantics & result) const;
         static bool compose(const RotationSemantics & op1, const RotationSemantics & op2, RotationSemantics & result);
-        static bool compose(const RotationSemantics & op1, const PositionSemantics & op2, PositionSemantics & result);
         static bool inverse2(const RotationSemantics & op, RotationSemantics & result);
         ///@}
 

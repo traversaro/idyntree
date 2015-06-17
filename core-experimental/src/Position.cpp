@@ -6,6 +6,7 @@
  */
 
 #include "Position.h"
+#include "Rotation.h"
 #include "Utils.h"
 #include <cassert>
 #include <iostream>
@@ -57,13 +58,21 @@ namespace iDynTree
     const Position& Position::changePoint(const Position& newPoint)
     {
         assert( this->semantics.changePoint(newPoint.semantics) );
-        return this->PositionRaw::changePoint(newPoint);
+        this->PositionRaw::changePoint(newPoint);
+        return *this;
     }
 
     const Position& Position::changeRefPoint(const Position& newRefPoint)
     {
         assert( this->semantics.changeRefPoint(newRefPoint.semantics) );
-        return this->PositionRaw::changeRefPoint(newRefPoint);
+        this->PositionRaw::changeRefPoint(newRefPoint);
+        return *this;
+    }
+
+    const Position& Position::changeCoordinateFrame(const Rotation & newCoordinateFrame)
+    {
+        *this = newCoordinateFrame.convertToNewCoordFrame(*this);
+        return *this;
     }
 
     Position Position::compose(const Position& op1, const Position& op2)
@@ -110,7 +119,5 @@ namespace iDynTree
     {
         return this->toString();
     }
-
-
 
 }
