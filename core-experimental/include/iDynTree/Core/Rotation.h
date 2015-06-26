@@ -98,7 +98,7 @@ namespace iDynTree
     
         /** overloaded operators **/
         Rotation operator*(const Rotation & other) const;
-        Rotation operator-() const;
+        Rotation inverse() const;
         Position operator*(const Position & other) const;
 
         /** @name Output helpers.

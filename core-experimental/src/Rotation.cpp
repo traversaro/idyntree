@@ -96,7 +96,7 @@ namespace iDynTree
         return compose(*this,other);
     }
 
-    Rotation Rotation::operator-() const
+    Rotation Rotation::inverse() const
     {
         return inverse2(*this);
     }
