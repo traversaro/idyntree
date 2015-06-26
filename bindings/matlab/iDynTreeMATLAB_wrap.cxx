@@ -3793,6 +3793,41 @@ fail:
 }
 
 
+void _wrap_PositionRaw_changeCoordinateFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::PositionRaw *arg1 = (iDynTree::PositionRaw *) 0 ;
+  iDynTree::RotationRaw *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::PositionRaw *result = 0 ;
+  
+  if (!SWIG_check_num_args("PositionRaw_changeCoordinateFrame",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionRaw_changeCoordinateFrame" "', argument " "1"" of type '" "iDynTree::PositionRaw *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::PositionRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionRaw_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionRaw_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::RotationRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::RotationRaw * >(argp2);
+  result = (iDynTree::PositionRaw *) &(arg1)->changeCoordinateFrame((iDynTree::RotationRaw const &)*arg2);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__PositionRaw, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function PositionRaw_changeCoordinateFrame.");
+}
+
+
 void _wrap_PositionRaw_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::PositionRaw *arg1 = 0 ;
   iDynTree::PositionRaw *arg2 = 0 ;
@@ -3855,100 +3890,6 @@ void _wrap_PositionRaw_inverse (int resc, mxArray *resv[], int argc, mxArray *ar
   return;
 fail:
   mexErrMsgTxt("Failure in function PositionRaw_inverse.");
-}
-
-
-void _wrap_PositionRaw_plus (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionRaw *arg1 = (iDynTree::PositionRaw *) 0 ;
-  iDynTree::PositionRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionRaw result;
-  
-  if (!SWIG_check_num_args("PositionRaw_plus",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionRaw_plus" "', argument " "1"" of type '" "iDynTree::PositionRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionRaw_plus" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionRaw_plus" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
-  result = ((iDynTree::PositionRaw const *)arg1)->operator +((iDynTree::PositionRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionRaw_plus.");
-}
-
-
-void _wrap_PositionRaw_minus (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionRaw *arg1 = (iDynTree::PositionRaw *) 0 ;
-  iDynTree::PositionRaw *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionRaw result;
-  
-  if (!SWIG_check_num_args("PositionRaw_minus",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionRaw_minus" "', argument " "1"" of type '" "iDynTree::PositionRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionRaw_minus" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionRaw_minus" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
-  result = ((iDynTree::PositionRaw const *)arg1)->operator -((iDynTree::PositionRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionRaw_minus.");
-}
-
-
-void _wrap_PositionRaw_uminus (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionRaw *arg1 = (iDynTree::PositionRaw *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionRaw result;
-  
-  if (!SWIG_check_num_args("PositionRaw_uminus",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionRaw, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionRaw_uminus" "', argument " "1"" of type '" "iDynTree::PositionRaw const *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionRaw * >(argp1);
-  result = ((iDynTree::PositionRaw const *)arg1)->operator -();
-  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionRaw_uminus.");
 }
 
 
@@ -4312,141 +4253,6 @@ fail:
 }
 
 
-void _wrap_PositionSemantics_check_changePoint (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = (iDynTree::PositionSemantics *) 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("PositionSemantics_check_changePoint",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionSemantics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_check_changePoint" "', argument " "1"" of type '" "iDynTree::PositionSemantics *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionSemantics_check_changePoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_check_changePoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (bool)(arg1)->check_changePoint((iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_check_changePoint.");
-}
-
-
-void _wrap_PositionSemantics_check_changeRefPoint (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = (iDynTree::PositionSemantics *) 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("PositionSemantics_check_changeRefPoint",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionSemantics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_check_changeRefPoint" "', argument " "1"" of type '" "iDynTree::PositionSemantics *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionSemantics_check_changeRefPoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_check_changeRefPoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (bool)(arg1)->check_changeRefPoint((iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_check_changeRefPoint.");
-}
-
-
-void _wrap_PositionSemantics_check_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("PositionSemantics_check_compose",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_check_compose" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_check_compose" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionSemantics_check_compose" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_check_compose" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (bool)iDynTree::PositionSemantics::check_compose((iDynTree::PositionSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_check_compose.");
-}
-
-
-void _wrap_PositionSemantics_check_inverse (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("PositionSemantics_check_inverse",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_check_inverse" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_check_inverse" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  result = (bool)iDynTree::PositionSemantics::check_inverse((iDynTree::PositionSemantics const &)*arg1);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_check_inverse.");
-}
-
-
 void _wrap_PositionSemantics_changePoint (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::PositionSemantics *arg1 = (iDynTree::PositionSemantics *) 0 ;
   iDynTree::PositionSemantics *arg2 = 0 ;
@@ -4455,7 +4261,7 @@ void _wrap_PositionSemantics_changePoint (int resc, mxArray *resv[], int argc, m
   void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
-  iDynTree::PositionSemantics *result = 0 ;
+  bool result;
   
   if (!SWIG_check_num_args("PositionSemantics_changePoint",argc,2,2,0)) {
     SWIG_fail;
@@ -4473,8 +4279,8 @@ void _wrap_PositionSemantics_changePoint (int resc, mxArray *resv[], int argc, m
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_changePoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (iDynTree::PositionSemantics *) &(arg1)->changePoint((iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__PositionSemantics, 0 |  0 );
+  result = (bool)(arg1)->changePoint((iDynTree::PositionSemantics const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -4490,7 +4296,7 @@ void _wrap_PositionSemantics_changeRefPoint (int resc, mxArray *resv[], int argc
   void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
-  iDynTree::PositionSemantics *result = 0 ;
+  bool result;
   
   if (!SWIG_check_num_args("PositionSemantics_changeRefPoint",argc,2,2,0)) {
     SWIG_fail;
@@ -4508,8 +4314,8 @@ void _wrap_PositionSemantics_changeRefPoint (int resc, mxArray *resv[], int argc
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_changeRefPoint" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (iDynTree::PositionSemantics *) &(arg1)->changeRefPoint((iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__PositionSemantics, 0 |  0 );
+  result = (bool)(arg1)->changeRefPoint((iDynTree::PositionSemantics const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -4517,45 +4323,42 @@ fail:
 }
 
 
-void _wrap_PositionSemantics_compose__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 ;
+void _wrap_PositionSemantics_changeCoordinateFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::PositionSemantics *arg1 = (iDynTree::PositionSemantics *) 0 ;
+  iDynTree::RotationSemantics *arg2 = 0 ;
+  void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
-  iDynTree::PositionSemantics result;
+  bool result;
   
-  if (!SWIG_check_num_args("PositionSemantics_compose",argc,2,2,0)) {
+  if (!SWIG_check_num_args("PositionSemantics_changeCoordinateFrame",argc,2,2,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__PositionSemantics, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_compose" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_compose" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_changeCoordinateFrame" "', argument " "1"" of type '" "iDynTree::PositionSemantics *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionSemantics_compose" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PositionSemantics_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_compose" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
   }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = iDynTree::PositionSemantics::compose((iDynTree::PositionSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionSemantics(static_cast< const iDynTree::PositionSemantics& >(result))), SWIGTYPE_p_iDynTree__PositionSemantics, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
+  result = (bool)(arg1)->changeCoordinateFrame((iDynTree::RotationSemantics const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_compose.");
+  mexErrMsgTxt("Failure in function PositionSemantics_changeCoordinateFrame.");
 }
 
 
-void _wrap_PositionSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_PositionSemantics_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::PositionSemantics *arg1 = 0 ;
   iDynTree::PositionSemantics *arg2 = 0 ;
   iDynTree::PositionSemantics *arg3 = 0 ;
@@ -4566,6 +4369,7 @@ void _wrap_PositionSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int arg
   void *argp3 = 0 ;
   int res3 = 0 ;
   mxArray * _out;
+  bool result;
   
   if (!SWIG_check_num_args("PositionSemantics_compose",argc,3,3,0)) {
     SWIG_fail;
@@ -4594,8 +4398,8 @@ void _wrap_PositionSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int arg
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_compose" "', argument " "3"" of type '" "iDynTree::PositionSemantics &""'"); 
   }
   arg3 = reinterpret_cast< iDynTree::PositionSemantics * >(argp3);
-  iDynTree::PositionSemantics::compose((iDynTree::PositionSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2,*arg3);
-  _out = (mxArray*)0;
+  result = (bool)iDynTree::PositionSemantics::compose((iDynTree::PositionSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -4603,74 +4407,7 @@ fail:
 }
 
 
-void _wrap_PositionSemantics_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_PositionSemantics_compose__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          return _wrap_PositionSemantics_compose__SWIG_1(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return;
-}
-
-
-void _wrap_PositionSemantics_inverse__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::PositionSemantics *arg1 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionSemantics result;
-  
-  if (!SWIG_check_num_args("PositionSemantics_inverse",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PositionSemantics_inverse" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_inverse" "', argument " "1"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::PositionSemantics * >(argp1);
-  result = iDynTree::PositionSemantics::inverse((iDynTree::PositionSemantics const &)*arg1);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionSemantics(static_cast< const iDynTree::PositionSemantics& >(result))), SWIGTYPE_p_iDynTree__PositionSemantics, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function PositionSemantics_inverse.");
-}
-
-
-void _wrap_PositionSemantics_inverse__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_PositionSemantics_inverse (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::PositionSemantics *arg1 = 0 ;
   iDynTree::PositionSemantics *arg2 = 0 ;
   void *argp1 ;
@@ -4678,6 +4415,7 @@ void _wrap_PositionSemantics_inverse__SWIG_1 (int resc, mxArray *resv[], int arg
   void *argp2 = 0 ;
   int res2 = 0 ;
   mxArray * _out;
+  bool result;
   
   if (!SWIG_check_num_args("PositionSemantics_inverse",argc,2,2,0)) {
     SWIG_fail;
@@ -4698,42 +4436,12 @@ void _wrap_PositionSemantics_inverse__SWIG_1 (int resc, mxArray *resv[], int arg
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PositionSemantics_inverse" "', argument " "2"" of type '" "iDynTree::PositionSemantics &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  iDynTree::PositionSemantics::inverse((iDynTree::PositionSemantics const &)*arg1,*arg2);
-  _out = (mxArray*)0;
+  result = (bool)iDynTree::PositionSemantics::inverse((iDynTree::PositionSemantics const &)*arg1,*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
   mexErrMsgTxt("Failure in function PositionSemantics_inverse.");
-}
-
-
-void _wrap_PositionSemantics_inverse (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_PositionSemantics_inverse__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_PositionSemantics_inverse__SWIG_1(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return;
 }
 
 
@@ -5108,6 +4816,41 @@ void _wrap_Position_changeRefPoint (int resc, mxArray *resv[], int argc, mxArray
   return;
 fail:
   mexErrMsgTxt("Failure in function Position_changeRefPoint.");
+}
+
+
+void _wrap_Position_changeCoordinateFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Position *arg1 = (iDynTree::Position *) 0 ;
+  iDynTree::Rotation *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Position *result = 0 ;
+  
+  if (!SWIG_check_num_args("Position_changeCoordinateFrame",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Position, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Position_changeCoordinateFrame" "', argument " "1"" of type '" "iDynTree::Position *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Position * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Rotation,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Position_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Position_changeCoordinateFrame" "', argument " "2"" of type '" "iDynTree::Rotation const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Rotation * >(argp2);
+  result = (iDynTree::Position *) &(arg1)->changeCoordinateFrame((iDynTree::Rotation const &)*arg2);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__Position, 0 |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Position_changeCoordinateFrame.");
 }
 
 
@@ -7085,6 +6828,41 @@ fail:
 }
 
 
+void _wrap_RotationRaw_convertToNewCoordFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationRaw *arg1 = (iDynTree::RotationRaw *) 0 ;
+  iDynTree::PositionRaw *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::PositionRaw result;
+  
+  if (!SWIG_check_num_args("RotationRaw_convertToNewCoordFrame",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationRaw, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_convertToNewCoordFrame" "', argument " "1"" of type '" "iDynTree::RotationRaw const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
+  result = ((iDynTree::RotationRaw const *)arg1)->convertToNewCoordFrame((iDynTree::PositionRaw const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationRaw_convertToNewCoordFrame.");
+}
+
+
 void _wrap_RotationRaw_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationRaw *arg1 = 0 ;
   iDynTree::RotationRaw *arg2 = 0 ;
@@ -7147,44 +6925,6 @@ void _wrap_RotationRaw_inverse2 (int resc, mxArray *resv[], int argc, mxArray *a
   return;
 fail:
   mexErrMsgTxt("Failure in function RotationRaw_inverse2.");
-}
-
-
-void _wrap_RotationRaw_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationRaw *arg1 = 0 ;
-  iDynTree::PositionRaw *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionRaw result;
-  
-  if (!SWIG_check_num_args("RotationRaw_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationRaw,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "1"" of type '" "iDynTree::RotationRaw const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationRaw * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionRaw,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationRaw_transform" "', argument " "2"" of type '" "iDynTree::PositionRaw const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionRaw * >(argp2);
-  result = iDynTree::RotationRaw::transform((iDynTree::RotationRaw const &)*arg1,(iDynTree::PositionRaw const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionRaw(static_cast< const iDynTree::PositionRaw& >(result))), SWIGTYPE_p_iDynTree__PositionRaw, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationRaw_transform.");
 }
 
 
@@ -7658,6 +7398,30 @@ fail:
 }
 
 
+void _wrap_RotationSemantics_getCoordinateFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  int result;
+  
+  if (!SWIG_check_num_args("RotationSemantics_getCoordinateFrame",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_getCoordinateFrame" "', argument " "1"" of type '" "iDynTree::RotationSemantics const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
+  result = (int)((iDynTree::RotationSemantics const *)arg1)->getCoordinateFrame();
+  _out = SWIG_From_int(static_cast< int >(result));
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function RotationSemantics_getCoordinateFrame.");
+}
+
+
 void _wrap_RotationSemantics_setOrientationFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
   int arg2 ;
@@ -7720,179 +7484,6 @@ fail:
 }
 
 
-void _wrap_RotationSemantics_check_changeOrientFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
-  iDynTree::RotationSemantics *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_check_changeOrientFrame",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_check_changeOrientFrame" "', argument " "1"" of type '" "iDynTree::RotationSemantics *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_check_changeOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_changeOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = (bool)(arg1)->check_changeOrientFrame((iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_check_changeOrientFrame.");
-}
-
-
-void _wrap_RotationSemantics_check_changeRefOrientFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
-  iDynTree::RotationSemantics *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_check_changeRefOrientFrame",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_check_changeRefOrientFrame" "', argument " "1"" of type '" "iDynTree::RotationSemantics *""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_check_changeRefOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_changeRefOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = (bool)(arg1)->check_changeRefOrientFrame((iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_check_changeRefOrientFrame.");
-}
-
-
-void _wrap_RotationSemantics_check_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  iDynTree::RotationSemantics *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_check_compose",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_check_compose" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_compose" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_check_compose" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_compose" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = (bool)iDynTree::RotationSemantics::check_compose((iDynTree::RotationSemantics const &)*arg1,(iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_check_compose.");
-}
-
-
-void _wrap_RotationSemantics_check_inverse2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_check_inverse2",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_check_inverse2" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_inverse2" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  result = (bool)iDynTree::RotationSemantics::check_inverse2((iDynTree::RotationSemantics const &)*arg1);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_check_inverse2.");
-}
-
-
-void _wrap_RotationSemantics_check_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  bool result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_check_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_check_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_check_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_check_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = (bool)iDynTree::RotationSemantics::check_transform((iDynTree::RotationSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_From_bool(static_cast< bool >(result));
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_check_transform.");
-}
-
-
 void _wrap_RotationSemantics_changeOrientFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
   iDynTree::RotationSemantics *arg2 = 0 ;
@@ -7901,7 +7492,7 @@ void _wrap_RotationSemantics_changeOrientFrame (int resc, mxArray *resv[], int a
   void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
-  iDynTree::RotationSemantics *result = 0 ;
+  bool result;
   
   if (!SWIG_check_num_args("RotationSemantics_changeOrientFrame",argc,2,2,0)) {
     SWIG_fail;
@@ -7919,8 +7510,8 @@ void _wrap_RotationSemantics_changeOrientFrame (int resc, mxArray *resv[], int a
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_changeOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = (iDynTree::RotationSemantics *) &(arg1)->changeOrientFrame((iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
+  result = (bool)(arg1)->changeOrientFrame((iDynTree::RotationSemantics const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -7936,7 +7527,7 @@ void _wrap_RotationSemantics_changeRefOrientFrame (int resc, mxArray *resv[], in
   void *argp2 ;
   int res2 = 0 ;
   mxArray * _out;
-  iDynTree::RotationSemantics *result = 0 ;
+  bool result;
   
   if (!SWIG_check_num_args("RotationSemantics_changeRefOrientFrame",argc,2,2,0)) {
     SWIG_fail;
@@ -7954,8 +7545,8 @@ void _wrap_RotationSemantics_changeRefOrientFrame (int resc, mxArray *resv[], in
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_changeRefOrientFrame" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = (iDynTree::RotationSemantics *) &(arg1)->changeRefOrientFrame((iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
+  result = (bool)(arg1)->changeRefOrientFrame((iDynTree::RotationSemantics const &)*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -7963,45 +7554,53 @@ fail:
 }
 
 
-void _wrap_RotationSemantics_compose__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  iDynTree::RotationSemantics *arg2 = 0 ;
-  void *argp1 ;
+void _wrap_RotationSemantics_convertToNewCoordFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::RotationSemantics *arg1 = (iDynTree::RotationSemantics *) 0 ;
+  iDynTree::PositionSemantics *arg2 = 0 ;
+  iDynTree::PositionSemantics *arg3 = 0 ;
+  void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
   mxArray * _out;
-  iDynTree::RotationSemantics result;
+  bool result;
   
-  if (!SWIG_check_num_args("RotationSemantics_compose",argc,2,2,0)) {
+  if (!SWIG_check_num_args("RotationSemantics_convertToNewCoordFrame",argc,3,3,0)) {
     SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__RotationSemantics, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_compose" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_compose" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_convertToNewCoordFrame" "', argument " "1"" of type '" "iDynTree::RotationSemantics const *""'"); 
   }
   arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_compose" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_compose" "', argument " "2"" of type '" "iDynTree::RotationSemantics const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
   }
-  arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  result = iDynTree::RotationSemantics::compose((iDynTree::RotationSemantics const &)*arg1,(iDynTree::RotationSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::RotationSemantics(static_cast< const iDynTree::RotationSemantics& >(result))), SWIGTYPE_p_iDynTree__RotationSemantics, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
+  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RotationSemantics_convertToNewCoordFrame" "', argument " "3"" of type '" "iDynTree::PositionSemantics &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_convertToNewCoordFrame" "', argument " "3"" of type '" "iDynTree::PositionSemantics &""'"); 
+  }
+  arg3 = reinterpret_cast< iDynTree::PositionSemantics * >(argp3);
+  result = (bool)((iDynTree::RotationSemantics const *)arg1)->convertToNewCoordFrame((iDynTree::PositionSemantics const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_compose.");
+  mexErrMsgTxt("Failure in function RotationSemantics_convertToNewCoordFrame.");
 }
 
 
-void _wrap_RotationSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationSemantics_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationSemantics *arg1 = 0 ;
   iDynTree::RotationSemantics *arg2 = 0 ;
   iDynTree::RotationSemantics *arg3 = 0 ;
@@ -8012,6 +7611,7 @@ void _wrap_RotationSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int arg
   void *argp3 = 0 ;
   int res3 = 0 ;
   mxArray * _out;
+  bool result;
   
   if (!SWIG_check_num_args("RotationSemantics_compose",argc,3,3,0)) {
     SWIG_fail;
@@ -8040,8 +7640,8 @@ void _wrap_RotationSemantics_compose__SWIG_1 (int resc, mxArray *resv[], int arg
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_compose" "', argument " "3"" of type '" "iDynTree::RotationSemantics &""'"); 
   }
   arg3 = reinterpret_cast< iDynTree::RotationSemantics * >(argp3);
-  iDynTree::RotationSemantics::compose((iDynTree::RotationSemantics const &)*arg1,(iDynTree::RotationSemantics const &)*arg2,*arg3);
-  _out = (mxArray*)0;
+  result = (bool)iDynTree::RotationSemantics::compose((iDynTree::RotationSemantics const &)*arg1,(iDynTree::RotationSemantics const &)*arg2,*arg3);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
@@ -8049,74 +7649,7 @@ fail:
 }
 
 
-void _wrap_RotationSemantics_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationSemantics_compose__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          return _wrap_RotationSemantics_compose__SWIG_1(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return;
-}
-
-
-void _wrap_RotationSemantics_inverse2__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  mxArray * _out;
-  iDynTree::RotationSemantics result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_inverse2",argc,1,1,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_inverse2" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_inverse2" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  result = iDynTree::RotationSemantics::inverse2((iDynTree::RotationSemantics const &)*arg1);
-  _out = SWIG_NewPointerObj((new iDynTree::RotationSemantics(static_cast< const iDynTree::RotationSemantics& >(result))), SWIGTYPE_p_iDynTree__RotationSemantics, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_inverse2.");
-}
-
-
-void _wrap_RotationSemantics_inverse2__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+void _wrap_RotationSemantics_inverse2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::RotationSemantics *arg1 = 0 ;
   iDynTree::RotationSemantics *arg2 = 0 ;
   void *argp1 ;
@@ -8124,6 +7657,7 @@ void _wrap_RotationSemantics_inverse2__SWIG_1 (int resc, mxArray *resv[], int ar
   void *argp2 = 0 ;
   int res2 = 0 ;
   mxArray * _out;
+  bool result;
   
   if (!SWIG_check_num_args("RotationSemantics_inverse2",argc,2,2,0)) {
     SWIG_fail;
@@ -8144,168 +7678,12 @@ void _wrap_RotationSemantics_inverse2__SWIG_1 (int resc, mxArray *resv[], int ar
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_inverse2" "', argument " "2"" of type '" "iDynTree::RotationSemantics &""'"); 
   }
   arg2 = reinterpret_cast< iDynTree::RotationSemantics * >(argp2);
-  iDynTree::RotationSemantics::inverse2((iDynTree::RotationSemantics const &)*arg1,*arg2);
-  _out = (mxArray*)0;
+  result = (bool)iDynTree::RotationSemantics::inverse2((iDynTree::RotationSemantics const &)*arg1,*arg2);
+  _out = SWIG_From_bool(static_cast< bool >(result));
   if (_out && --resc>=0) *resv++ = _out;
   return;
 fail:
   mexErrMsgTxt("Failure in function RotationSemantics_inverse2.");
-}
-
-
-void _wrap_RotationSemantics_inverse2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_RotationSemantics_inverse2__SWIG_0(resc,resv,argc,argv);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationSemantics_inverse2__SWIG_1(resc,resv,argc,argv);
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return;
-}
-
-
-void _wrap_RotationSemantics_transform__SWIG_0 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::PositionSemantics result;
-  
-  if (!SWIG_check_num_args("RotationSemantics_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  result = iDynTree::RotationSemantics::transform((iDynTree::RotationSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::PositionSemantics(static_cast< const iDynTree::PositionSemantics& >(result))), SWIGTYPE_p_iDynTree__PositionSemantics, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_transform.");
-}
-
-
-void _wrap_RotationSemantics_transform__SWIG_1 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::RotationSemantics *arg1 = 0 ;
-  iDynTree::PositionSemantics *arg2 = 0 ;
-  iDynTree::PositionSemantics *arg3 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  mxArray * _out;
-  
-  if (!SWIG_check_num_args("RotationSemantics_transform",argc,3,3,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__RotationSemantics,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RotationSemantics_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_transform" "', argument " "1"" of type '" "iDynTree::RotationSemantics const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::RotationSemantics * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RotationSemantics_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_transform" "', argument " "2"" of type '" "iDynTree::PositionSemantics const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::PositionSemantics * >(argp2);
-  res3 = SWIG_ConvertPtr(argv[2], &argp3, SWIGTYPE_p_iDynTree__PositionSemantics,  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RotationSemantics_transform" "', argument " "3"" of type '" "iDynTree::PositionSemantics &""'"); 
-  }
-  if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RotationSemantics_transform" "', argument " "3"" of type '" "iDynTree::PositionSemantics &""'"); 
-  }
-  arg3 = reinterpret_cast< iDynTree::PositionSemantics * >(argp3);
-  iDynTree::RotationSemantics::transform((iDynTree::RotationSemantics const &)*arg1,(iDynTree::PositionSemantics const &)*arg2,*arg3);
-  _out = (mxArray*)0;
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function RotationSemantics_transform.");
-}
-
-
-void _wrap_RotationSemantics_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_RotationSemantics_transform__SWIG_0(resc,resv,argc,argv);
-      }
-    }
-  }
-  if (argc == 3) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__RotationSemantics, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_iDynTree__PositionSemantics, 0);
-        _v = SWIG_CheckState(res);
-        if (_v) {
-          return _wrap_RotationSemantics_transform__SWIG_1(resc,resv,argc,argv);
-        }
-      }
-    }
-  }
-  
-  mexWarnMsgIdAndTxt("SWIG:RuntimeError","No matching function for overload");
-  return;
 }
 
 
@@ -8767,6 +8145,41 @@ fail:
 }
 
 
+void _wrap_Rotation_convertToNewCoordFrame (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Rotation *arg1 = (iDynTree::Rotation *) 0 ;
+  iDynTree::Position *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  mxArray * _out;
+  iDynTree::Position result;
+  
+  if (!SWIG_check_num_args("Rotation_convertToNewCoordFrame",argc,2,2,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Rotation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_convertToNewCoordFrame" "', argument " "1"" of type '" "iDynTree::Rotation const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
+  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Position,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_convertToNewCoordFrame" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
+  }
+  arg2 = reinterpret_cast< iDynTree::Position * >(argp2);
+  result = ((iDynTree::Rotation const *)arg1)->convertToNewCoordFrame((iDynTree::Position const &)*arg2);
+  _out = SWIG_NewPointerObj((new iDynTree::Position(static_cast< const iDynTree::Position& >(result))), SWIGTYPE_p_iDynTree__Position, SWIG_POINTER_OWN |  0 );
+  if (_out && --resc>=0) *resv++ = _out;
+  return;
+fail:
+  mexErrMsgTxt("Failure in function Rotation_convertToNewCoordFrame.");
+}
+
+
 void _wrap_Rotation_compose (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   iDynTree::Rotation *arg1 = 0 ;
   iDynTree::Rotation *arg2 = 0 ;
@@ -8829,44 +8242,6 @@ void _wrap_Rotation_inverse2 (int resc, mxArray *resv[], int argc, mxArray *argv
   return;
 fail:
   mexErrMsgTxt("Failure in function Rotation_inverse2.");
-}
-
-
-void _wrap_Rotation_transform (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
-  iDynTree::Rotation *arg1 = 0 ;
-  iDynTree::Position *arg2 = 0 ;
-  void *argp1 ;
-  int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
-  mxArray * _out;
-  iDynTree::Position result;
-  
-  if (!SWIG_check_num_args("Rotation_transform",argc,2,2,0)) {
-    SWIG_fail;
-  }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1, SWIGTYPE_p_iDynTree__Rotation,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "1"" of type '" "iDynTree::Rotation const &""'"); 
-  }
-  arg1 = reinterpret_cast< iDynTree::Rotation * >(argp1);
-  res2 = SWIG_ConvertPtr(argv[1], &argp2, SWIGTYPE_p_iDynTree__Position,  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rotation_transform" "', argument " "2"" of type '" "iDynTree::Position const &""'"); 
-  }
-  arg2 = reinterpret_cast< iDynTree::Position * >(argp2);
-  result = iDynTree::Rotation::transform((iDynTree::Rotation const &)*arg1,(iDynTree::Position const &)*arg2);
-  _out = SWIG_NewPointerObj((new iDynTree::Position(static_cast< const iDynTree::Position& >(result))), SWIGTYPE_p_iDynTree__Position, SWIG_POINTER_OWN |  0 );
-  if (_out && --resc>=0) *resv++ = _out;
-  return;
-fail:
-  mexErrMsgTxt("Failure in function Rotation_transform.");
 }
 
 
@@ -12164,7 +11539,8 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   if (!is_loaded) {
     SWIG_Matlab_LoadModule(SWIG_name_d);
     is_loaded=true;
-  }
+    mxArray *err;
+    mexEvalString("iDynTreesetup");  }
   if (--argc < 0 || !mxIsDouble(*argv) || mxGetNumberOfElements(*argv)!=1)
     mexErrMsgTxt("This mex file should only be called from inside the .m files generated by SWIG. First input should be the function ID .");
   int fcn_id = (int)mxGetScalar(*argv++);
@@ -12228,165 +11604,157 @@ void mexFunction(int resc, mxArray *resv[], int argc, const mxArray *argv[]) {
   case 52: if ((name_ok=!strcmp("PositionRaw_zero",cmd))) _wrap_PositionRaw_zero(resc,resv,argc,(mxArray**)(argv)); break;
   case 53: if ((name_ok=!strcmp("PositionRaw_changePoint",cmd))) _wrap_PositionRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
   case 54: if ((name_ok=!strcmp("PositionRaw_changeRefPoint",cmd))) _wrap_PositionRaw_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 55: if ((name_ok=!strcmp("PositionRaw_compose",cmd))) _wrap_PositionRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 56: if ((name_ok=!strcmp("PositionRaw_inverse",cmd))) _wrap_PositionRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 57: if ((name_ok=!strcmp("PositionRaw_plus",cmd))) _wrap_PositionRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 58: if ((name_ok=!strcmp("PositionRaw_minus",cmd))) _wrap_PositionRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 59: if ((name_ok=!strcmp("PositionRaw_uminus",cmd))) _wrap_PositionRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 60: if ((name_ok=!strcmp("PositionRaw_toString",cmd))) _wrap_PositionRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 61: if ((name_ok=!strcmp("PositionRaw_display",cmd))) _wrap_PositionRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 62: if ((name_ok=!strcmp("new_PositionSemantics",cmd))) _wrap_new_PositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 63: if ((name_ok=!strcmp("delete_PositionSemantics",cmd))) _wrap_delete_PositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 64: if ((name_ok=!strcmp("PositionSemantics_getPoint",cmd))) _wrap_PositionSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 65: if ((name_ok=!strcmp("PositionSemantics_getReferencePoint",cmd))) _wrap_PositionSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 66: if ((name_ok=!strcmp("PositionSemantics_getCoordinateFrame",cmd))) _wrap_PositionSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 67: if ((name_ok=!strcmp("PositionSemantics_setPoint",cmd))) _wrap_PositionSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 68: if ((name_ok=!strcmp("PositionSemantics_setReferencePoint",cmd))) _wrap_PositionSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 69: if ((name_ok=!strcmp("PositionSemantics_setCoordinateFrame",cmd))) _wrap_PositionSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 70: if ((name_ok=!strcmp("PositionSemantics_check_changePoint",cmd))) _wrap_PositionSemantics_check_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 71: if ((name_ok=!strcmp("PositionSemantics_check_changeRefPoint",cmd))) _wrap_PositionSemantics_check_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 72: if ((name_ok=!strcmp("PositionSemantics_check_compose",cmd))) _wrap_PositionSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 73: if ((name_ok=!strcmp("PositionSemantics_check_inverse",cmd))) _wrap_PositionSemantics_check_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 74: if ((name_ok=!strcmp("PositionSemantics_changePoint",cmd))) _wrap_PositionSemantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 75: if ((name_ok=!strcmp("PositionSemantics_changeRefPoint",cmd))) _wrap_PositionSemantics_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 76: if ((name_ok=!strcmp("PositionSemantics_compose",cmd))) _wrap_PositionSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 77: if ((name_ok=!strcmp("PositionSemantics_inverse",cmd))) _wrap_PositionSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 78: if ((name_ok=!strcmp("PositionSemantics_toString",cmd))) _wrap_PositionSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 79: if ((name_ok=!strcmp("PositionSemantics_display",cmd))) _wrap_PositionSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 80: if ((name_ok=!strcmp("new_Position",cmd))) _wrap_new_Position(resc,resv,argc,(mxArray**)(argv)); break;
-  case 81: if ((name_ok=!strcmp("delete_Position",cmd))) _wrap_delete_Position(resc,resv,argc,(mxArray**)(argv)); break;
-  case 82: if ((name_ok=!strcmp("Position_getSemantics",cmd))) _wrap_Position_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 83: if ((name_ok=!strcmp("Position_changePoint",cmd))) _wrap_Position_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 84: if ((name_ok=!strcmp("Position_changeRefPoint",cmd))) _wrap_Position_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 85: if ((name_ok=!strcmp("Position_compose",cmd))) _wrap_Position_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 86: if ((name_ok=!strcmp("Position_inverse",cmd))) _wrap_Position_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 87: if ((name_ok=!strcmp("Position_plus",cmd))) _wrap_Position_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 88: if ((name_ok=!strcmp("Position_minus",cmd))) _wrap_Position_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 89: if ((name_ok=!strcmp("Position_uminus",cmd))) _wrap_Position_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 90: if ((name_ok=!strcmp("Position_toString",cmd))) _wrap_Position_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 91: if ((name_ok=!strcmp("Position_display",cmd))) _wrap_Position_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 92: if ((name_ok=!strcmp("new_SpatialForceVectorRaw",cmd))) _wrap_new_SpatialForceVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 93: if ((name_ok=!strcmp("delete_SpatialForceVectorRaw",cmd))) _wrap_delete_SpatialForceVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 94: if ((name_ok=!strcmp("SpatialForceVectorRaw_changePoint",cmd))) _wrap_SpatialForceVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 95: if ((name_ok=!strcmp("SpatialForceVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialForceVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 96: if ((name_ok=!strcmp("SpatialForceVectorRaw_compose",cmd))) _wrap_SpatialForceVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 97: if ((name_ok=!strcmp("SpatialForceVectorRaw_inverse",cmd))) _wrap_SpatialForceVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 98: if ((name_ok=!strcmp("SpatialForceVectorRaw_dot",cmd))) _wrap_SpatialForceVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 99: if ((name_ok=!strcmp("SpatialForceVectorRaw_plus",cmd))) _wrap_SpatialForceVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 100: if ((name_ok=!strcmp("SpatialForceVectorRaw_minus",cmd))) _wrap_SpatialForceVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 101: if ((name_ok=!strcmp("SpatialForceVectorRaw_uminus",cmd))) _wrap_SpatialForceVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 102: if ((name_ok=!strcmp("new_SpatialMotionVectorRaw",cmd))) _wrap_new_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 103: if ((name_ok=!strcmp("delete_SpatialMotionVectorRaw",cmd))) _wrap_delete_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 104: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changePoint",cmd))) _wrap_SpatialMotionVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 105: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialMotionVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 106: if ((name_ok=!strcmp("SpatialMotionVectorRaw_compose",cmd))) _wrap_SpatialMotionVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 107: if ((name_ok=!strcmp("SpatialMotionVectorRaw_inverse",cmd))) _wrap_SpatialMotionVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 108: if ((name_ok=!strcmp("SpatialMotionVectorRaw_dot",cmd))) _wrap_SpatialMotionVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
-  case 109: if ((name_ok=!strcmp("SpatialMotionVectorRaw_plus",cmd))) _wrap_SpatialMotionVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 110: if ((name_ok=!strcmp("SpatialMotionVectorRaw_minus",cmd))) _wrap_SpatialMotionVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 111: if ((name_ok=!strcmp("SpatialMotionVectorRaw_uminus",cmd))) _wrap_SpatialMotionVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
-  case 112: if ((name_ok=!strcmp("new_Twist",cmd))) _wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 113: if ((name_ok=!strcmp("delete_Twist",cmd))) _wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
-  case 114: if ((name_ok=!strcmp("new_Wrench",cmd))) _wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 115: if ((name_ok=!strcmp("delete_Wrench",cmd))) _wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
-  case 116: if ((name_ok=!strcmp("new_RotationRaw",cmd))) _wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 117: if ((name_ok=!strcmp("delete_RotationRaw",cmd))) _wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 118: if ((name_ok=!strcmp("RotationRaw_TODOparen",cmd))) _wrap_RotationRaw_TODOparen(resc,resv,argc,(mxArray**)(argv)); break;
-  case 119: if ((name_ok=!strcmp("RotationRaw_getVal",cmd))) _wrap_RotationRaw_getVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 120: if ((name_ok=!strcmp("RotationRaw_setVal",cmd))) _wrap_RotationRaw_setVal(resc,resv,argc,(mxArray**)(argv)); break;
-  case 121: if ((name_ok=!strcmp("RotationRaw_rows",cmd))) _wrap_RotationRaw_rows(resc,resv,argc,(mxArray**)(argv)); break;
-  case 122: if ((name_ok=!strcmp("RotationRaw_cols",cmd))) _wrap_RotationRaw_cols(resc,resv,argc,(mxArray**)(argv)); break;
-  case 123: if ((name_ok=!strcmp("RotationRaw_data",cmd))) _wrap_RotationRaw_data(resc,resv,argc,(mxArray**)(argv)); break;
-  case 124: if ((name_ok=!strcmp("RotationRaw_changeOrientFrame",cmd))) _wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 125: if ((name_ok=!strcmp("RotationRaw_changeRefOrientFrame",cmd))) _wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 126: if ((name_ok=!strcmp("RotationRaw_compose",cmd))) _wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 127: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) _wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 128: if ((name_ok=!strcmp("RotationRaw_transform",cmd))) _wrap_RotationRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 129: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) _wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 130: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) _wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 131: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) _wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 132: if ((name_ok=!strcmp("RotationRaw_display",cmd))) _wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 133: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) _wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
-  case 134: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) _wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 135: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) _wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
-  case 136: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) _wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
-  case 137: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) _wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 138: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) _wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 139: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) _wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 140: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 141: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) _wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 142: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 143: if ((name_ok=!strcmp("RotationSemantics_check_changeOrientFrame",cmd))) _wrap_RotationSemantics_check_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 144: if ((name_ok=!strcmp("RotationSemantics_check_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_check_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 145: if ((name_ok=!strcmp("RotationSemantics_check_compose",cmd))) _wrap_RotationSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 146: if ((name_ok=!strcmp("RotationSemantics_check_inverse2",cmd))) _wrap_RotationSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 147: if ((name_ok=!strcmp("RotationSemantics_check_transform",cmd))) _wrap_RotationSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 148: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) _wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 149: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 150: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) _wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 151: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) _wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 152: if ((name_ok=!strcmp("RotationSemantics_transform",cmd))) _wrap_RotationSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 153: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) _wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 154: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) _wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 155: if ((name_ok=!strcmp("new_Rotation",cmd))) _wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 156: if ((name_ok=!strcmp("delete_Rotation",cmd))) _wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 157: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) _wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 158: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) _wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 159: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) _wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 160: if ((name_ok=!strcmp("Rotation_compose",cmd))) _wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 161: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) _wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 162: if ((name_ok=!strcmp("Rotation_transform",cmd))) _wrap_Rotation_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 163: if ((name_ok=!strcmp("Rotation_inverse",cmd))) _wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 164: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) _wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 165: if ((name_ok=!strcmp("Rotation_toString",cmd))) _wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 166: if ((name_ok=!strcmp("Rotation_display",cmd))) _wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 167: if ((name_ok=!strcmp("new_TransformRaw",cmd))) _wrap_new_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 168: if ((name_ok=!strcmp("delete_TransformRaw",cmd))) _wrap_delete_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
-  case 169: if ((name_ok=!strcmp("TransformRaw_compose",cmd))) _wrap_TransformRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 170: if ((name_ok=!strcmp("TransformRaw_inverse2",cmd))) _wrap_TransformRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 171: if ((name_ok=!strcmp("TransformRaw_transform",cmd))) _wrap_TransformRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 172: if ((name_ok=!strcmp("TransformRaw_inverse",cmd))) _wrap_TransformRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 173: if ((name_ok=!strcmp("TransformRaw_mtimes",cmd))) _wrap_TransformRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 174: if ((name_ok=!strcmp("TransformRaw_toString",cmd))) _wrap_TransformRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 175: if ((name_ok=!strcmp("TransformRaw_display",cmd))) _wrap_TransformRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 176: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) _wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 177: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) _wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 178: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) _wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 179: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) _wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 180: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) _wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 181: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) _wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 182: if ((name_ok=!strcmp("TransformSemantics_getPoint",cmd))) _wrap_TransformSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 183: if ((name_ok=!strcmp("TransformSemantics_getOrientationFrame",cmd))) _wrap_TransformSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 184: if ((name_ok=!strcmp("TransformSemantics_getReferencePoint",cmd))) _wrap_TransformSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 185: if ((name_ok=!strcmp("TransformSemantics_getReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 186: if ((name_ok=!strcmp("TransformSemantics_setPoint",cmd))) _wrap_TransformSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 187: if ((name_ok=!strcmp("TransformSemantics_setOrientationFrame",cmd))) _wrap_TransformSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 188: if ((name_ok=!strcmp("TransformSemantics_setReferencePoint",cmd))) _wrap_TransformSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
-  case 189: if ((name_ok=!strcmp("TransformSemantics_setReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
-  case 190: if ((name_ok=!strcmp("TransformSemantics_check_compose",cmd))) _wrap_TransformSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 191: if ((name_ok=!strcmp("TransformSemantics_check_inverse2",cmd))) _wrap_TransformSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 192: if ((name_ok=!strcmp("TransformSemantics_check_transform",cmd))) _wrap_TransformSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 193: if ((name_ok=!strcmp("TransformSemantics_compose",cmd))) _wrap_TransformSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 194: if ((name_ok=!strcmp("TransformSemantics_inverse2",cmd))) _wrap_TransformSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 195: if ((name_ok=!strcmp("TransformSemantics_transform",cmd))) _wrap_TransformSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 196: if ((name_ok=!strcmp("TransformSemantics_inverse",cmd))) _wrap_TransformSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 197: if ((name_ok=!strcmp("TransformSemantics_mtimes",cmd))) _wrap_TransformSemantics_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 198: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) _wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 199: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) _wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
-  case 200: if ((name_ok=!strcmp("new_Transform",cmd))) _wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 201: if ((name_ok=!strcmp("delete_Transform",cmd))) _wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 202: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) _wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
-  case 203: if ((name_ok=!strcmp("Transform_getRotation",cmd))) _wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 204: if ((name_ok=!strcmp("Transform_getPosition",cmd))) _wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 205: if ((name_ok=!strcmp("Transform_setRotation",cmd))) _wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
-  case 206: if ((name_ok=!strcmp("Transform_setPosition",cmd))) _wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
-  case 207: if ((name_ok=!strcmp("Transform_compose",cmd))) _wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
-  case 208: if ((name_ok=!strcmp("Transform_inverse2",cmd))) _wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
-  case 209: if ((name_ok=!strcmp("Transform_transform",cmd))) _wrap_Transform_transform(resc,resv,argc,(mxArray**)(argv)); break;
-  case 210: if ((name_ok=!strcmp("Transform_inverse",cmd))) _wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
-  case 211: if ((name_ok=!strcmp("Transform_mtimes",cmd))) _wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
-  case 212: if ((name_ok=!strcmp("Transform_toString",cmd))) _wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
-  case 213: if ((name_ok=!strcmp("Transform_display",cmd))) _wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 55: if ((name_ok=!strcmp("PositionRaw_changeCoordinateFrame",cmd))) _wrap_PositionRaw_changeCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 56: if ((name_ok=!strcmp("PositionRaw_compose",cmd))) _wrap_PositionRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 57: if ((name_ok=!strcmp("PositionRaw_inverse",cmd))) _wrap_PositionRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 58: if ((name_ok=!strcmp("PositionRaw_toString",cmd))) _wrap_PositionRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 59: if ((name_ok=!strcmp("PositionRaw_display",cmd))) _wrap_PositionRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 60: if ((name_ok=!strcmp("new_PositionSemantics",cmd))) _wrap_new_PositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 61: if ((name_ok=!strcmp("delete_PositionSemantics",cmd))) _wrap_delete_PositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 62: if ((name_ok=!strcmp("PositionSemantics_getPoint",cmd))) _wrap_PositionSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 63: if ((name_ok=!strcmp("PositionSemantics_getReferencePoint",cmd))) _wrap_PositionSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 64: if ((name_ok=!strcmp("PositionSemantics_getCoordinateFrame",cmd))) _wrap_PositionSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 65: if ((name_ok=!strcmp("PositionSemantics_setPoint",cmd))) _wrap_PositionSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 66: if ((name_ok=!strcmp("PositionSemantics_setReferencePoint",cmd))) _wrap_PositionSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 67: if ((name_ok=!strcmp("PositionSemantics_setCoordinateFrame",cmd))) _wrap_PositionSemantics_setCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 68: if ((name_ok=!strcmp("PositionSemantics_changePoint",cmd))) _wrap_PositionSemantics_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 69: if ((name_ok=!strcmp("PositionSemantics_changeRefPoint",cmd))) _wrap_PositionSemantics_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 70: if ((name_ok=!strcmp("PositionSemantics_changeCoordinateFrame",cmd))) _wrap_PositionSemantics_changeCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 71: if ((name_ok=!strcmp("PositionSemantics_compose",cmd))) _wrap_PositionSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 72: if ((name_ok=!strcmp("PositionSemantics_inverse",cmd))) _wrap_PositionSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 73: if ((name_ok=!strcmp("PositionSemantics_toString",cmd))) _wrap_PositionSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 74: if ((name_ok=!strcmp("PositionSemantics_display",cmd))) _wrap_PositionSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 75: if ((name_ok=!strcmp("new_Position",cmd))) _wrap_new_Position(resc,resv,argc,(mxArray**)(argv)); break;
+  case 76: if ((name_ok=!strcmp("delete_Position",cmd))) _wrap_delete_Position(resc,resv,argc,(mxArray**)(argv)); break;
+  case 77: if ((name_ok=!strcmp("Position_getSemantics",cmd))) _wrap_Position_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 78: if ((name_ok=!strcmp("Position_changePoint",cmd))) _wrap_Position_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 79: if ((name_ok=!strcmp("Position_changeRefPoint",cmd))) _wrap_Position_changeRefPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 80: if ((name_ok=!strcmp("Position_changeCoordinateFrame",cmd))) _wrap_Position_changeCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 81: if ((name_ok=!strcmp("Position_compose",cmd))) _wrap_Position_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 82: if ((name_ok=!strcmp("Position_inverse",cmd))) _wrap_Position_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 83: if ((name_ok=!strcmp("Position_plus",cmd))) _wrap_Position_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 84: if ((name_ok=!strcmp("Position_minus",cmd))) _wrap_Position_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 85: if ((name_ok=!strcmp("Position_uminus",cmd))) _wrap_Position_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 86: if ((name_ok=!strcmp("Position_toString",cmd))) _wrap_Position_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 87: if ((name_ok=!strcmp("Position_display",cmd))) _wrap_Position_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 88: if ((name_ok=!strcmp("new_SpatialForceVectorRaw",cmd))) _wrap_new_SpatialForceVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 89: if ((name_ok=!strcmp("delete_SpatialForceVectorRaw",cmd))) _wrap_delete_SpatialForceVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 90: if ((name_ok=!strcmp("SpatialForceVectorRaw_changePoint",cmd))) _wrap_SpatialForceVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 91: if ((name_ok=!strcmp("SpatialForceVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialForceVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 92: if ((name_ok=!strcmp("SpatialForceVectorRaw_compose",cmd))) _wrap_SpatialForceVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 93: if ((name_ok=!strcmp("SpatialForceVectorRaw_inverse",cmd))) _wrap_SpatialForceVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 94: if ((name_ok=!strcmp("SpatialForceVectorRaw_dot",cmd))) _wrap_SpatialForceVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 95: if ((name_ok=!strcmp("SpatialForceVectorRaw_plus",cmd))) _wrap_SpatialForceVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 96: if ((name_ok=!strcmp("SpatialForceVectorRaw_minus",cmd))) _wrap_SpatialForceVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 97: if ((name_ok=!strcmp("SpatialForceVectorRaw_uminus",cmd))) _wrap_SpatialForceVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 98: if ((name_ok=!strcmp("new_SpatialMotionVectorRaw",cmd))) _wrap_new_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 99: if ((name_ok=!strcmp("delete_SpatialMotionVectorRaw",cmd))) _wrap_delete_SpatialMotionVectorRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 100: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changePoint",cmd))) _wrap_SpatialMotionVectorRaw_changePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 101: if ((name_ok=!strcmp("SpatialMotionVectorRaw_changeCoordFrame",cmd))) _wrap_SpatialMotionVectorRaw_changeCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 102: if ((name_ok=!strcmp("SpatialMotionVectorRaw_compose",cmd))) _wrap_SpatialMotionVectorRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 103: if ((name_ok=!strcmp("SpatialMotionVectorRaw_inverse",cmd))) _wrap_SpatialMotionVectorRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 104: if ((name_ok=!strcmp("SpatialMotionVectorRaw_dot",cmd))) _wrap_SpatialMotionVectorRaw_dot(resc,resv,argc,(mxArray**)(argv)); break;
+  case 105: if ((name_ok=!strcmp("SpatialMotionVectorRaw_plus",cmd))) _wrap_SpatialMotionVectorRaw_plus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 106: if ((name_ok=!strcmp("SpatialMotionVectorRaw_minus",cmd))) _wrap_SpatialMotionVectorRaw_minus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 107: if ((name_ok=!strcmp("SpatialMotionVectorRaw_uminus",cmd))) _wrap_SpatialMotionVectorRaw_uminus(resc,resv,argc,(mxArray**)(argv)); break;
+  case 108: if ((name_ok=!strcmp("new_Twist",cmd))) _wrap_new_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 109: if ((name_ok=!strcmp("delete_Twist",cmd))) _wrap_delete_Twist(resc,resv,argc,(mxArray**)(argv)); break;
+  case 110: if ((name_ok=!strcmp("new_Wrench",cmd))) _wrap_new_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 111: if ((name_ok=!strcmp("delete_Wrench",cmd))) _wrap_delete_Wrench(resc,resv,argc,(mxArray**)(argv)); break;
+  case 112: if ((name_ok=!strcmp("new_RotationRaw",cmd))) _wrap_new_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 113: if ((name_ok=!strcmp("delete_RotationRaw",cmd))) _wrap_delete_RotationRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 114: if ((name_ok=!strcmp("RotationRaw_TODOparen",cmd))) _wrap_RotationRaw_TODOparen(resc,resv,argc,(mxArray**)(argv)); break;
+  case 115: if ((name_ok=!strcmp("RotationRaw_getVal",cmd))) _wrap_RotationRaw_getVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 116: if ((name_ok=!strcmp("RotationRaw_setVal",cmd))) _wrap_RotationRaw_setVal(resc,resv,argc,(mxArray**)(argv)); break;
+  case 117: if ((name_ok=!strcmp("RotationRaw_rows",cmd))) _wrap_RotationRaw_rows(resc,resv,argc,(mxArray**)(argv)); break;
+  case 118: if ((name_ok=!strcmp("RotationRaw_cols",cmd))) _wrap_RotationRaw_cols(resc,resv,argc,(mxArray**)(argv)); break;
+  case 119: if ((name_ok=!strcmp("RotationRaw_data",cmd))) _wrap_RotationRaw_data(resc,resv,argc,(mxArray**)(argv)); break;
+  case 120: if ((name_ok=!strcmp("RotationRaw_changeOrientFrame",cmd))) _wrap_RotationRaw_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 121: if ((name_ok=!strcmp("RotationRaw_changeRefOrientFrame",cmd))) _wrap_RotationRaw_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 122: if ((name_ok=!strcmp("RotationRaw_convertToNewCoordFrame",cmd))) _wrap_RotationRaw_convertToNewCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 123: if ((name_ok=!strcmp("RotationRaw_compose",cmd))) _wrap_RotationRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 124: if ((name_ok=!strcmp("RotationRaw_inverse2",cmd))) _wrap_RotationRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 125: if ((name_ok=!strcmp("RotationRaw_inverse",cmd))) _wrap_RotationRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 126: if ((name_ok=!strcmp("RotationRaw_mtimes",cmd))) _wrap_RotationRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 127: if ((name_ok=!strcmp("RotationRaw_toString",cmd))) _wrap_RotationRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 128: if ((name_ok=!strcmp("RotationRaw_display",cmd))) _wrap_RotationRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 129: if ((name_ok=!strcmp("RotationRaw_RotX",cmd))) _wrap_RotationRaw_RotX(resc,resv,argc,(mxArray**)(argv)); break;
+  case 130: if ((name_ok=!strcmp("RotationRaw_RotY",cmd))) _wrap_RotationRaw_RotY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 131: if ((name_ok=!strcmp("RotationRaw_RotZ",cmd))) _wrap_RotationRaw_RotZ(resc,resv,argc,(mxArray**)(argv)); break;
+  case 132: if ((name_ok=!strcmp("RotationRaw_RPY",cmd))) _wrap_RotationRaw_RPY(resc,resv,argc,(mxArray**)(argv)); break;
+  case 133: if ((name_ok=!strcmp("new_RotationSemantics",cmd))) _wrap_new_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 134: if ((name_ok=!strcmp("delete_RotationSemantics",cmd))) _wrap_delete_RotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 135: if ((name_ok=!strcmp("RotationSemantics_getOrientationFrame",cmd))) _wrap_RotationSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 136: if ((name_ok=!strcmp("RotationSemantics_getReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 137: if ((name_ok=!strcmp("RotationSemantics_getCoordinateFrame",cmd))) _wrap_RotationSemantics_getCoordinateFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 138: if ((name_ok=!strcmp("RotationSemantics_setOrientationFrame",cmd))) _wrap_RotationSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 139: if ((name_ok=!strcmp("RotationSemantics_setReferenceOrientationFrame",cmd))) _wrap_RotationSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 140: if ((name_ok=!strcmp("RotationSemantics_changeOrientFrame",cmd))) _wrap_RotationSemantics_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 141: if ((name_ok=!strcmp("RotationSemantics_changeRefOrientFrame",cmd))) _wrap_RotationSemantics_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 142: if ((name_ok=!strcmp("RotationSemantics_convertToNewCoordFrame",cmd))) _wrap_RotationSemantics_convertToNewCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 143: if ((name_ok=!strcmp("RotationSemantics_compose",cmd))) _wrap_RotationSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 144: if ((name_ok=!strcmp("RotationSemantics_inverse2",cmd))) _wrap_RotationSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 145: if ((name_ok=!strcmp("RotationSemantics_toString",cmd))) _wrap_RotationSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 146: if ((name_ok=!strcmp("RotationSemantics_display",cmd))) _wrap_RotationSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 147: if ((name_ok=!strcmp("new_Rotation",cmd))) _wrap_new_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 148: if ((name_ok=!strcmp("delete_Rotation",cmd))) _wrap_delete_Rotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 149: if ((name_ok=!strcmp("Rotation_getSemantics",cmd))) _wrap_Rotation_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 150: if ((name_ok=!strcmp("Rotation_changeOrientFrame",cmd))) _wrap_Rotation_changeOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 151: if ((name_ok=!strcmp("Rotation_changeRefOrientFrame",cmd))) _wrap_Rotation_changeRefOrientFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 152: if ((name_ok=!strcmp("Rotation_convertToNewCoordFrame",cmd))) _wrap_Rotation_convertToNewCoordFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 153: if ((name_ok=!strcmp("Rotation_compose",cmd))) _wrap_Rotation_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 154: if ((name_ok=!strcmp("Rotation_inverse2",cmd))) _wrap_Rotation_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 155: if ((name_ok=!strcmp("Rotation_inverse",cmd))) _wrap_Rotation_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 156: if ((name_ok=!strcmp("Rotation_mtimes",cmd))) _wrap_Rotation_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 157: if ((name_ok=!strcmp("Rotation_toString",cmd))) _wrap_Rotation_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 158: if ((name_ok=!strcmp("Rotation_display",cmd))) _wrap_Rotation_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 159: if ((name_ok=!strcmp("new_TransformRaw",cmd))) _wrap_new_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 160: if ((name_ok=!strcmp("delete_TransformRaw",cmd))) _wrap_delete_TransformRaw(resc,resv,argc,(mxArray**)(argv)); break;
+  case 161: if ((name_ok=!strcmp("TransformRaw_compose",cmd))) _wrap_TransformRaw_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 162: if ((name_ok=!strcmp("TransformRaw_inverse2",cmd))) _wrap_TransformRaw_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 163: if ((name_ok=!strcmp("TransformRaw_transform",cmd))) _wrap_TransformRaw_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 164: if ((name_ok=!strcmp("TransformRaw_inverse",cmd))) _wrap_TransformRaw_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 165: if ((name_ok=!strcmp("TransformRaw_mtimes",cmd))) _wrap_TransformRaw_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 166: if ((name_ok=!strcmp("TransformRaw_toString",cmd))) _wrap_TransformRaw_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 167: if ((name_ok=!strcmp("TransformRaw_display",cmd))) _wrap_TransformRaw_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 168: if ((name_ok=!strcmp("new_TransformSemantics",cmd))) _wrap_new_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 169: if ((name_ok=!strcmp("delete_TransformSemantics",cmd))) _wrap_delete_TransformSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 170: if ((name_ok=!strcmp("TransformSemantics_getRotationSemantics",cmd))) _wrap_TransformSemantics_getRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 171: if ((name_ok=!strcmp("TransformSemantics_getPositionSemantics",cmd))) _wrap_TransformSemantics_getPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 172: if ((name_ok=!strcmp("TransformSemantics_setRotationSemantics",cmd))) _wrap_TransformSemantics_setRotationSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 173: if ((name_ok=!strcmp("TransformSemantics_setPositionSemantics",cmd))) _wrap_TransformSemantics_setPositionSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 174: if ((name_ok=!strcmp("TransformSemantics_getPoint",cmd))) _wrap_TransformSemantics_getPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 175: if ((name_ok=!strcmp("TransformSemantics_getOrientationFrame",cmd))) _wrap_TransformSemantics_getOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 176: if ((name_ok=!strcmp("TransformSemantics_getReferencePoint",cmd))) _wrap_TransformSemantics_getReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 177: if ((name_ok=!strcmp("TransformSemantics_getReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_getReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 178: if ((name_ok=!strcmp("TransformSemantics_setPoint",cmd))) _wrap_TransformSemantics_setPoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 179: if ((name_ok=!strcmp("TransformSemantics_setOrientationFrame",cmd))) _wrap_TransformSemantics_setOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 180: if ((name_ok=!strcmp("TransformSemantics_setReferencePoint",cmd))) _wrap_TransformSemantics_setReferencePoint(resc,resv,argc,(mxArray**)(argv)); break;
+  case 181: if ((name_ok=!strcmp("TransformSemantics_setReferenceOrientationFrame",cmd))) _wrap_TransformSemantics_setReferenceOrientationFrame(resc,resv,argc,(mxArray**)(argv)); break;
+  case 182: if ((name_ok=!strcmp("TransformSemantics_check_compose",cmd))) _wrap_TransformSemantics_check_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 183: if ((name_ok=!strcmp("TransformSemantics_check_inverse2",cmd))) _wrap_TransformSemantics_check_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 184: if ((name_ok=!strcmp("TransformSemantics_check_transform",cmd))) _wrap_TransformSemantics_check_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 185: if ((name_ok=!strcmp("TransformSemantics_compose",cmd))) _wrap_TransformSemantics_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 186: if ((name_ok=!strcmp("TransformSemantics_inverse2",cmd))) _wrap_TransformSemantics_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 187: if ((name_ok=!strcmp("TransformSemantics_transform",cmd))) _wrap_TransformSemantics_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 188: if ((name_ok=!strcmp("TransformSemantics_inverse",cmd))) _wrap_TransformSemantics_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 189: if ((name_ok=!strcmp("TransformSemantics_mtimes",cmd))) _wrap_TransformSemantics_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 190: if ((name_ok=!strcmp("TransformSemantics_toString",cmd))) _wrap_TransformSemantics_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 191: if ((name_ok=!strcmp("TransformSemantics_display",cmd))) _wrap_TransformSemantics_display(resc,resv,argc,(mxArray**)(argv)); break;
+  case 192: if ((name_ok=!strcmp("new_Transform",cmd))) _wrap_new_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 193: if ((name_ok=!strcmp("delete_Transform",cmd))) _wrap_delete_Transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 194: if ((name_ok=!strcmp("Transform_getSemantics",cmd))) _wrap_Transform_getSemantics(resc,resv,argc,(mxArray**)(argv)); break;
+  case 195: if ((name_ok=!strcmp("Transform_getRotation",cmd))) _wrap_Transform_getRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 196: if ((name_ok=!strcmp("Transform_getPosition",cmd))) _wrap_Transform_getPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 197: if ((name_ok=!strcmp("Transform_setRotation",cmd))) _wrap_Transform_setRotation(resc,resv,argc,(mxArray**)(argv)); break;
+  case 198: if ((name_ok=!strcmp("Transform_setPosition",cmd))) _wrap_Transform_setPosition(resc,resv,argc,(mxArray**)(argv)); break;
+  case 199: if ((name_ok=!strcmp("Transform_compose",cmd))) _wrap_Transform_compose(resc,resv,argc,(mxArray**)(argv)); break;
+  case 200: if ((name_ok=!strcmp("Transform_inverse2",cmd))) _wrap_Transform_inverse2(resc,resv,argc,(mxArray**)(argv)); break;
+  case 201: if ((name_ok=!strcmp("Transform_transform",cmd))) _wrap_Transform_transform(resc,resv,argc,(mxArray**)(argv)); break;
+  case 202: if ((name_ok=!strcmp("Transform_inverse",cmd))) _wrap_Transform_inverse(resc,resv,argc,(mxArray**)(argv)); break;
+  case 203: if ((name_ok=!strcmp("Transform_mtimes",cmd))) _wrap_Transform_mtimes(resc,resv,argc,(mxArray**)(argv)); break;
+  case 204: if ((name_ok=!strcmp("Transform_toString",cmd))) _wrap_Transform_toString(resc,resv,argc,(mxArray**)(argv)); break;
+  case 205: if ((name_ok=!strcmp("Transform_display",cmd))) _wrap_Transform_display(resc,resv,argc,(mxArray**)(argv)); break;
   default: mexErrMsgIdAndTxt("SWIG:RuntimeError","No function id %d.",fcn_id);
   }
   if (!name_ok) {
