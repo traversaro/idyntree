@@ -80,7 +80,7 @@ namespace iDynTree
     };
 
     typedef AngularForceVector3 AngMomentum;
-    typedef AngularForceVector3 Torque;
+    typedef AngularForceVector3 Moment;
 }
 
 #endif /* IDYNTREE_ANGULAR_FORCE_VECTOR_3_H */

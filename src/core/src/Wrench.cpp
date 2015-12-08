@@ -16,7 +16,7 @@ Wrench::Wrench()
 }
 
 Wrench::Wrench(const Force & _linearVec3,
-               const Torque & _angularVec3):
+               const Moment & _angularVec3):
                SpatialForceVector(_linearVec3, _angularVec3)
 {
 

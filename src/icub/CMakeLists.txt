@@ -6,12 +6,16 @@ project(iDynTree_ICUB CXX)
 
 SET(iDynTree_ICUB_source
                          src/TorqueEstimationTree.cpp
+                         src/iDynContact.cpp
+                         src/TorqueEstimationTreeWoKDL.cpp
                          src/iDyn2KDL.cpp
                          src/idyn2kdl_icub.cpp)
 
 SET(iDynTree_ICUB_header
                   include/iCub/iDynTree/iDyn2KDL.h
                   include/iCub/iDynTree/TorqueEstimationTree.h
+                  include/iCub/iDynTree/iDynContact.h
+                  include/iCub/iDynTree/TorqueEstimationTreeWoKDL.h
                   include/iCub/iDynTree/idyn2kdl_icub.h)
 
 SOURCE_GROUP("Source Files" FILES ${iDynTree_ICUB_source})

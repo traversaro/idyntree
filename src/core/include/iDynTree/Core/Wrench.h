@@ -23,7 +23,7 @@ namespace iDynTree
     {
     public:
         Wrench();
-        Wrench(const Force & _linearVec3, const Torque & _angularVec3);
+        Wrench(const Force & _linearVec3, const Moment & _angularVec3);
         Wrench(const SpatialForceVector & other);
         Wrench(const Wrench & other);
         virtual ~Wrench();

@@ -460,11 +460,7 @@ bool TorqueEstimationTree::getSkinDynLibAlias(const std::string iDynTree_link_na
        return false;
    }
 
-   skinDynLibLinkID sdl_id;
-   sdl_id.body_part = skinDynLib_body_part;
-   sdl_id.local_link_index = skinDynLib_link_index;
-
-     // TODO \todo What is this crazyness??? Linear search of a map??
+   // TODO \todo What is this crazyness??? Linear search of a map??
    for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
@@ -487,9 +483,9 @@ bool TorqueEstimationTree::getSkinDynLibAlias(const std::string iDynTree_link_na
 bool TorqueEstimationTree::getSkinDynLibAlias(const int iDynTree_link_index, int & iDynTree_frame_index,
                         int & skinDynLib_body_part, int & skinDynLib_link_index)
 {
-  if( iDynTree_link_index < 0 || iDynTree_link_index >= this->getNrOfLinks() ) return false;
+   if( iDynTree_link_index < 0 || iDynTree_link_index >= this->getNrOfLinks() ) return false;
 
-  // TODO \todo What is this crazyness??? Linear search of a map??
+   // TODO \todo What is this crazyness??? Linear search of a map??
    for(std::map<skinDynLibLinkID,iDynTreeLinkAndFrame>::iterator it = skinDynLibLinkMap.begin();
        it != skinDynLibLinkMap.end(); it++ )
    {
