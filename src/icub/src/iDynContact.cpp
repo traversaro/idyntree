@@ -28,52 +28,46 @@ using namespace iDynTree;
 //   DYN CONTACT
 //~~~~~~~~~~~~~~~~~~~~~~
 iDynContact::iDynContact():
-contactId(-1),
-linkIndex(-1),
-frameIndex(-1)
+contactId(-1)
 {
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-iDynContact::iDynContact(const unsigned long _contactId, const unsigned int _linkIndex,
-                         unsigned int _frameIndex, const Position & _CoP,
-                         const Force & _Fdir, const Moment & _Mu):
+iDynContact::iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                        const Position & _CoP):
 contactId(_contactId),
 linkIndex(_linkIndex),
-frameIndex(_frameIndex)
+frameIndex(_frameIndex),
+CoP(_CoP),
+muKnown(false),
+fDirKnown(false)
 {
-//    if (_Fdir==NULL)
-//    {
-//        Fdir = Position::Zero();
-//        fDirKnown = false;
-//    }
-//    else
-//    {
-//        Fdir = _Fdir;
-//        fDirKnown = true;
-//    }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#if 0
-void iDynContact::init(const BodyPart &_bodyPart, unsigned int _linkNumber, const Vector &_CoP, const Vector &_Mu, const Vector &_Fdir){
-    contactId = ID++;
-    setBodyPart(_bodyPart);
-    setLinkNumber(_linkNumber);
-    setCoP(_CoP);
-    Mu.resize(3, 0.0);
-    Fdir.resize(3, 0.0);
-    F.resize(3, 0.0);
-    Fmodule = 0.0;
-
-    if(_Mu.size()==0)
-        muKnown = false;
-    else
-        fixMoment(_Mu);
-
-    if(_Fdir.size()==0)
-        fDirKnown = false;
-    else
-        fixForceDirection(_Fdir);
+iDynContact::iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                        const Position & _CoP, const Moment & _Mu):
+contactId(_contactId),
+linkIndex(_linkIndex),
+frameIndex(_frameIndex),
+CoP(_CoP),
+Mu(_Mu),
+muKnown(true),
+fDirKnown(false)
+{
 }
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+iDynContact::iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                         const Position & _CoP, const Moment & _Mu, const Force & _Fdir):
+contactId(_contactId),
+linkIndex(_linkIndex),
+frameIndex(_frameIndex),
+CoP(_CoP),
+Mu(_Mu),
+Fdir(_Fdir),
+muKnown(true),
+fDirKnown(true)
+{
+}
+#if 0
 //~~~~~~~~~~~~~~~~~~~~~~
 //   GET methods
 //~~~~~~~~~~~~~~~~~~~~~~

@@ -55,14 +55,14 @@ namespace iDynTree
         unsigned int frameIndex;
         /// 3-dim center of pressure of the contact expressed w.r.t. the reference frame of the link
         Position CoP;
+        /// contact moment (3-dim vector)
+        Moment Mu;
         ///contact force direction (3-dim unit vector)
         Force Fdir;
         /// contact force module
         double Fmodule;
         ///contact force (3-dim vector)
         Force F;
-        /// contact moment (3-dim vector)
-        Moment Mu;
         /// contact wrench resulting from contact force/moment
         Wrench spatialF;
 
@@ -81,23 +81,34 @@ namespace iDynTree
          */
         iDynContact();
         /**
-         * Constructor with moment and force direction. If these are unknown, default value is NULL.
+         * Constructor with unknown moment and force direction
+         * @param _bodyPart the body part associated to this contact
+         * @param _linkNumber the number of the link on which this contact is applied
+         * @param _CoP the 3-dim center of pressure of this contact in link reference frame
+         */
+        iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                    const Position & _CoP);
+        /**
+         * Constructor with known moment (usually zero) and unknown force direction
+         * @param _bodyPart the body part associated to this contact
+         * @param _linkNumber the number of the link on which this contact is applied
+         * @param _CoP the 3-dim center of pressure of this contact in link reference frame
+         * @param _Mu the moment applied at this contact, expressed in link reference frame
+         */
+        iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                    const Position & _CoP, const Moment & _Mu);
+        /**
+         * Constructor with known moment (usually zero) and known force direction
          * @param _bodyPart the body part associated to this contact
          * @param _linkNumber the number of the link on which this contact is applied
          * @param _CoP the 3-dim center of pressure of this contact in link reference frame
          * @param _Mu the moment applied at this contact, expressed in link reference frame
          * @param _Fdir the direction of the contact force, expressed in link reference frame
          */
-        iDynContact(const unsigned long _contactId, const unsigned int _linkIndex,
-                    unsigned int _frameIndex, const Position & _CoP,
-                    const Force & _Fdir, const Moment & _Mu);
+        iDynContact(const unsigned long _contactId, const unsigned int _linkIndex, unsigned int _frameIndex,
+                    const Position & _CoP, const Moment & _Mu, const Force & _Fdir);
 
 #if 0
-        /**
-         * Constructor from a dynContact object.
-         * @param otherDynContact
-         */
-        iDynContact(const dynContact & otherDynContact);
         //~~~~~~~~~~~~~~~~~~~~~~
         //   GET methods
         //~~~~~~~~~~~~~~~~~~~~~~
