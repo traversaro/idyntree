@@ -7,58 +7,58 @@ classdef RevoluteJoint < iDynTree.MovableJointImpl1
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(750, varargin{:});
+        tmp = iDynTreeMEX(753, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.swigPtr = [];
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(751, self);
+        iDynTreeMEX(754, self);
         self.swigPtr=[];
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(752, self, varargin{:});
-    end
-    function varargout = setAttachedLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(753, self, varargin{:});
-    end
-    function varargout = setRestTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(754, self, varargin{:});
-    end
-    function varargout = setAxis(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(755, self, varargin{:});
     end
-    function varargout = getFirstAttachedLink(self,varargin)
+    function varargout = setAttachedLinks(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(756, self, varargin{:});
     end
-    function varargout = getSecondAttachedLink(self,varargin)
+    function varargout = setRestTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(757, self, varargin{:});
     end
-    function varargout = getAxis(self,varargin)
+    function varargout = setAxis(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(758, self, varargin{:});
     end
-    function varargout = getRestTransform(self,varargin)
+    function varargout = getFirstAttachedLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(759, self, varargin{:});
     end
-    function varargout = getTransform(self,varargin)
+    function varargout = getSecondAttachedLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(760, self, varargin{:});
     end
-    function varargout = getTransformDerivative(self,varargin)
+    function varargout = getAxis(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(761, self, varargin{:});
     end
-    function varargout = getMotionSubspaceVector(self,varargin)
+    function varargout = getRestTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(762, self, varargin{:});
     end
-    function varargout = computeChildPosVelAcc(self,varargin)
+    function varargout = getTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(763, self, varargin{:});
     end
-    function varargout = computeChildVelAcc(self,varargin)
+    function varargout = getTransformDerivative(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(764, self, varargin{:});
     end
-    function varargout = computeJointTorque(self,varargin)
+    function varargout = getMotionSubspaceVector(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(765, self, varargin{:});
+    end
+    function varargout = computeChildPosVelAcc(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(766, self, varargin{:});
+    end
+    function varargout = computeChildVelAcc(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(767, self, varargin{:});
+    end
+    function varargout = computeJointTorque(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(768, self, varargin{:});
     end
   end
   methods(Static)

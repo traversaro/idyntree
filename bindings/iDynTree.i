@@ -75,6 +75,8 @@
 #include "iDynTree/Model/JointState.h"
 #include "iDynTree/Model/FreeFloatingState.h"
 #include "iDynTree/Model/ContactWrench.h"
+//Forward kinematics
+#include "iDynTree/Model/ForwardKinematics.h"
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFModelImport.h"
@@ -99,6 +101,8 @@
 
 // High level interfaces
 #include "iDynTree/HighLevel/DynamicsComputations.h"
+
+
 
 %}
 
@@ -211,6 +215,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Model/IJoint.h"
 %include "iDynTree/Model/FixedJoint.h"
 %include "iDynTree/Model/MovableJointImpl.h"
+%include "iDynTree/Model/ForwardKinematics.h"
 
 %template(MovableJointImpl1) iDynTree::MovableJointImpl<1,1>;
 %template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;

@@ -1,0 +1,3 @@
+function varargout = ForwardPositionKinematics(varargin)
+  [varargout{1:nargout}] = iDynTreeMEX(696, varargin{:});
+end
