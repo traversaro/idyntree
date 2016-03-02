@@ -43568,6 +43568,30 @@ fail:
 }
 
 
+int _wrap_new_AccelerometerSensor__SWIG_2 (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
+  iDynTree::Sensor *arg1 = (iDynTree::Sensor *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  mxArray * _out;
+  iDynTree::AccelerometerSensor *result = 0 ;
+  
+  if (!SWIG_check_num_args("new_AccelerometerSensor",argc,1,1,0)) {
+    SWIG_fail;
+  }
+  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_iDynTree__Sensor, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_AccelerometerSensor" "', argument " "1"" of type '" "iDynTree::Sensor const *""'"); 
+  }
+  arg1 = reinterpret_cast< iDynTree::Sensor * >(argp1);
+  result = (iDynTree::AccelerometerSensor *)new iDynTree::AccelerometerSensor((iDynTree::Sensor const *)arg1);
+  _out = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_iDynTree__AccelerometerSensor, 1 |  0 );
+  if (_out) --resc, *resv++ = _out;
+  return 0;
+fail:
+  return 1;
+}
+
+
 int _wrap_new_AccelerometerSensor (int resc, mxArray *resv[], int argc, mxArray *argv[]) {
   if (argc == 0) {
     return _wrap_new_AccelerometerSensor__SWIG_0(resc,resv,argc,argv);
@@ -43581,11 +43605,21 @@ int _wrap_new_AccelerometerSensor (int resc, mxArray *resv[], int argc, mxArray 
       return _wrap_new_AccelerometerSensor__SWIG_1(resc,resv,argc,argv);
     }
   }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_iDynTree__Sensor, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_AccelerometerSensor__SWIG_2(resc,resv,argc,argv);
+    }
+  }
   
   SWIG_Error(SWIG_RuntimeError, "No matching function for overload function 'new_AccelerometerSensor'."
     "  Possible C/C++ prototypes are:\n"
     "    iDynTree::AccelerometerSensor::AccelerometerSensor()\n"
-    "    iDynTree::AccelerometerSensor::AccelerometerSensor(iDynTree::AccelerometerSensor const &)\n");
+    "    iDynTree::AccelerometerSensor::AccelerometerSensor(iDynTree::AccelerometerSensor const &)\n"
+    "    iDynTree::AccelerometerSensor::AccelerometerSensor(iDynTree::Sensor const *)\n");
   return 1;
 }
 
