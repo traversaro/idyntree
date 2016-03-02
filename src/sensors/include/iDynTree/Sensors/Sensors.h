@@ -268,6 +268,12 @@ namespace iDynTree {
              */
             Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
 
+            /**
+             * Crop the sensorList and remove the items *not* listed in the arguments
+             *
+             * \return the success of the operation
+             */
+//             bool cropSensorList(const SensorType &sensor_type, const vector<std::string> & sensorNameList);
 
     };
 

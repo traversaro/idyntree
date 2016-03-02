@@ -247,6 +247,23 @@ Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) 
     }
 }
 
+// bool SensorsList::cropSensorList(const SensorType& sensor_type, const vector< std::string >& sensorNameList)
+// {
+//     bool retVal = true;
+//     for(std::vector<std::string>::iterator it = sensorNameList.begin(); it!= sensorNameList.end();++it)
+//     {
+//         if(getSensorIndex(sensor_type,*it) == -1)
+//         {
+//             // sensorList does not contain named sensor
+//             return(false);
+//         }
+//
+//     }
+//
+//     // TODO : implement the actual pruning
+//     return(retVal);
+// }
+
 
 
 ///////////////////////////////////////////////////////////////////////////////

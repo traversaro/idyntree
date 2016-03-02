@@ -58,6 +58,14 @@ AccelerometerSensor::AccelerometerSensor(const AccelerometerSensor& other):
 
 }
 
+AccelerometerSensor::AccelerometerSensor(const Sensor* other)
+{
+    AccelerometerSensor *acc = (AccelerometerSensor *)other;
+    pimpl = new AccelerometerPrivateAttributes(*(acc->pimpl));
+}
+
+
+
 AccelerometerSensor& AccelerometerSensor::operator=(const AccelerometerSensor& other)
 {
     if(this != &other)

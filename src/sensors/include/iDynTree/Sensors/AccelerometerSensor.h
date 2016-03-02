@@ -59,6 +59,11 @@ namespace iDynTree {
         AccelerometerSensor(const AccelerometerSensor& other);
 
         /**
+         * Copy constructor
+         */
+        AccelerometerSensor(const Sensor* other);
+
+        /**
          * Copy operator
          */
         AccelerometerSensor& operator=(const AccelerometerSensor &other);
