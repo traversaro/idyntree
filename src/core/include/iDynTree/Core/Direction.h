@@ -62,9 +62,25 @@ namespace iDynTree
          * and you want to be sure that this direction is actually
          * a unit vector.
          *
-         * @parma tol if the norm of the vector < tol, set the direction to 1,0,0
+         * @param tol if the norm of the vector < tol, set the direction to 1,0,0
          */
         void Normalize(double tol=DEFAULT_TOL);
+
+        /**
+         * Check if two directions are parallel.
+         *
+         * @param otherDirection the direction to check for parallelism.
+         * @param tolerance tolerance to use in the parallelism check.
+         */
+        bool isParallel(const Direction & otherDirection, double tolerance) const;
+
+        /**
+         * Check if two directions are perpendicular.
+         *
+         * @param otherDirection the direction to check for the perpendicular check.
+         * @param tolerance tolerance to use in the perpendicular check.
+         */
+        bool isPerpendicular(const Direction & otherDirection, double tolerance) const;
 
         /**
          * @name Output helpers.
