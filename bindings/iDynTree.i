@@ -22,6 +22,11 @@ namespace std {
 %include "./python/python.i"
 #endif
 
+// Java
+#ifdef SWIGJAVA
+%include "./java/java.i"
+#endif
+
 // Matlab
 #ifdef SWIGMATLAB
 %include "./matlab/matlab.i"

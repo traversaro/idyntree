@@ -8,10 +8,12 @@ option(IDYNTREE_USES_PYTHON "Do you want to create the Python interface" FALSE)
 option(IDYNTREE_USES_LUA "Do you want to create the Lua interface" FALSE)
 option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB Interface" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
+option(IDYNTREE_USES_JAVA "Do you want to create the Java Interface" FALSE)
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA OR
    IDYNTREE_USES_MATLAB OR
+   IDYNTREE_USES_JAVA OR
    IDYNTREE_GENERATE_MATLAB)
     if(NOT IDYNTREE_USES_KDL)
         message(FATAL_ERROR "Impossible generated bindings if KDL is not enabled")
@@ -51,12 +53,18 @@ if(SWIG_FOUND)
     if(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
        add_subdirectory(matlab)
     endif(IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
+
+    if(IDYNTREE_USES_JAVA)
+       add_subdirectory(java)
+    endif()
+
 endif(SWIG_FOUND)
 
 if(IDYNTREE_USES_PYTHON OR
    IDYNTREE_USES_LUA    OR
    IDYNTREE_USES_MATLAB OR
-   IDYNTREE_GENERATED_MATLAB)
+   IDYNTREE_GENERATED_MATLAB OR
+   IDYNTREE_USES_JAVA)
    if(NOT SWIG_FOUND)
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile iDynTree bindings.")
    endif()
