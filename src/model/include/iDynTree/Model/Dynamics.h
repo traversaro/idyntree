@@ -82,7 +82,7 @@ namespace iDynTree
         DOFSpatialMotionArray S;
         DOFSpatialForceArray U;
         JointDOFsDoubleArray D;
-        JointDOFsDoubleArray u;
+        JointDOFsDoubleArray uu;
         LinkVelArray linksVel;
         LinkAccArray linksBiasAcceleration;
         LinkAccArray linksAccelerations;
