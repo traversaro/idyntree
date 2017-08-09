@@ -83,6 +83,25 @@ namespace iDynTree
                                    const std::vector<std::string>& splitJoints);
 
         /**
+         * Create a submodel decomposition
+         * of a given model with a given full tree traversal,
+         * such that the specified links are the basis of the submodel present in the decomposition.
+         *
+         * @param[in] model the model to split
+         * @param[in] traversal the full model traversal to split
+         * @param[in] subModelBasis the model will be split in a way such that the specified links will be the submodel bases.
+         *
+         * The link not specified will be assigned to the submodel for which the number of the DOF between the base and the link
+         * are minimal in the model. In case of tie, the submodel with lower link index will choosen.
+         *
+         * @warning This method assume that no closed loops are present in the Model object.
+         * @return true if all went fine, false otherwise
+         */
+        bool splitModelWithSpecifiedBasesLinks(const Model & model,
+                                               const Traversal & traversal,
+                                               const std::vector<std::string>& subModelBasis);
+
+        /**
          * Set the number of the submodels in the decomposition.
          */
         void setNrOfSubModels(const size_t nrOfSubModels);

@@ -15,6 +15,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include <deque>
 
 namespace iDynTree
 {
@@ -125,7 +126,7 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
         {
             std::cerr << "[ERROR] SubModelDecomposition::splitModelAlongJoints error : "
                       << " requested to split the model along joint " << splitJoints[jnt]
-                      << " but no joint with that is in the model. " << std::endl;
+                      << " but no joint with that name is in the model. " << std::endl;
             return false;
         }
 
@@ -224,6 +225,148 @@ bool SubModelDecomposition::splitModelAlongJoints(const Model& model,
     return true;
 }
 
+bool SubModelDecomposition::splitModelWithSpecifiedBasesLinks(const Model &model, const Traversal &traversal,
+                                                              const std::vector<std::string> &subModelBases)
+{
+    // first we check that all the subModelBasis are actually
+    // links of the model
+    for(size_t lnk=0; lnk < subModelBases.size(); lnk++ )
+    {
+        if( !model.isLinkNameUsed(subModelBases[lnk]) )
+        {
+            std::cerr << "[ERROR] SubModelDecomposition::splitModelWithSpecifiedBasesLinks error : "
+                      << " requested to split the model using link " << subModelBases[lnk]
+                      << " as base, but no link with that name is in the model. " << std::endl;
+            return false;
+        }
+
+        // Check for duplicates (while it would be possible to handle duplicates,
+        // duplicates are tipically associated with some error in the input parameters)
+        // O(n^2) solution for checking the duplicates, it can be improved but this simple solution
+        // should work fine for tipical uses cases
+        for (size_t duplicateLnk=0; duplicateLnk < subModelBases.size(); duplicateLnk++ )
+        {
+            if (duplicateLnk != lnk && subModelBases[lnk] == subModelBases[duplicateLnk])
+            {
+                std::cerr << "[ERROR] SubModelDecomposition::splitModelWithSpecifiedBasesLinks error : "
+                          << " the link " << subModelBases[lnk] << " is both the element "
+                          << lnk << " and " << duplicateLnk << " of the subModelBases list,"
+                          << " please check the list of links." << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // The number of link in the decomposition is exactly
+    // the number of links in the model
+    this->link2subModelIndex.resize(model.getNrOfLinks());
+
+    // we first need to resize the decomposition
+    // the number of the submodels is exactly the number of the links that are the bases of the submodes
+    this->setNrOfSubModels(subModelBases.size());
+
+    // we will assign links to the submodel using a
+    // simple scheme: we start searching recursivly the neighbors
+    // saving their index and the dof-distance from a link in a map
+    // As soon as we found a subModel base, we stop exploring an
+    // save its distance in separate map . Once all the candidate
+    // base have been explored, the one with the lower dof-distance
+    // is selected as the base of the submodel to which assign the link
+    for(LinkIndex lnkIdx=0; lnkIdx < model.getNrOfLinks(); lnkIdx )
+    {
+        // If link is a subModelBase, assign it to the corresponding subModel
+
+
+        // Otherwise iterate on the neighbors
+        std::deque<std::pair<LinkIndex, size_t> > linkToVisiQueue;
+        while (!linkToVisiQueue.empty())
+        {
+            // Get a new element
+            LinkIndex baseCandidate = linkToVisiQueue.front().first;
+            size_t baseCandidateDofDistance = linkToVisiQueue.front().second;
+            linkToVisiQueue.pop_front();
+
+            std::string linkName = model.getLinkName(lnkIdx);
+            auto iter = std::find(subModelBases.begin(), subModelBases.end(), linkName)
+
+            bool baseCandidateIsSubModelBase = (iter != subModelBases.end());
+
+            if (baseCandidateIsSubModelBase)
+            {
+                // Select as base candidate, if its distance is lower then the one currently selected
+                size_t subModelIdx = (size_t)(iter - subModelBases.begin());
+
+
+            }
+            else
+            {
+                // Insert all neighbors, increasing the distance
+            }
+        }
+
+    }
+
+
+
+    size_t newSubModelIndexAvailableToUse = 0;
+
+    for(size_t fullModelTraversalEl=0;
+        fullModelTraversalEl < fullModelTraversal.getNrOfVisitedLinks();
+        fullModelTraversalEl++)
+    {
+        LinkConstPtr visitedLink = fullModelTraversal.getLink(fullModelTraversalEl);
+        LinkIndex    visitedLinkIndex = visitedLink->getIndex();
+
+        // the link is assigned to a new subModel if
+        // the visited link is the base or if it is connected
+        // to its parent with a split joint
+        bool isLinkBaseOfNewSubModel = false;
+        bool isLinkBaseOfFullTreeTraversal = (fullModelTraversalEl == 0);
+
+        if( isLinkBaseOfFullTreeTraversal )
+        {
+            isLinkBaseOfNewSubModel = true;
+        }
+        else
+        {
+            IJointConstPtr jointToParent = fullModelTraversal.getParentJoint(fullModelTraversalEl);
+            std::string jointToParentName = model.getJointName(jointToParent->getIndex());
+
+            bool isJointToParentASplitJoint =
+                    (std::find(splitJoints.begin(), splitJoints.end(), jointToParentName) != splitJoints.end());
+
+            if( isJointToParentASplitJoint )
+            {
+                isLinkBaseOfNewSubModel = true;
+            }
+
+        }
+
+        if( isLinkBaseOfNewSubModel )
+        {
+            this->link2subModelIndex[visitedLinkIndex] = newSubModelIndexAvailableToUse;
+            this->subModelTraversals[newSubModelIndexAvailableToUse]->reset(model);
+            this->subModelTraversals[newSubModelIndexAvailableToUse]->addTraversalBase(visitedLink);
+
+            newSubModelIndexAvailableToUse++;
+        }
+        else
+        {
+            // In this case we know that the link has a parent,
+            // otherwise it would be a base of the submodel traversal
+            LinkConstPtr parentLink = fullModelTraversal.getParentLink(fullModelTraversalEl);
+            IJointConstPtr jointToParent = fullModelTraversal.getParentJoint(fullModelTraversalEl);
+
+            size_t subModelIndex = this->link2subModelIndex[visitedLinkIndex]
+                                           = this->link2subModelIndex[parentLink->getIndex()];
+
+            this->subModelTraversals[subModelIndex]->addTraversalElement(visitedLink,jointToParent,parentLink);
+        }
+    }
+
+    return true;
+}
+
 void computeTransformToTraversalBase(const Model& fullModel,
                                      const Traversal& subModelTraversal,
                                      const JointPosDoubleArray& jointPos,
@@ -271,6 +414,7 @@ void computeTransformToSubModelBase(const Model& fullModel,
                                         subModelBase_H_link);
     }
 }
+
 
 
 
