@@ -202,6 +202,26 @@ public:
                                        const Vector3 & gravity);
 
     /**
+     * Set the kinematic information necessary for the force estimation using the
+     * acceleration and angular velocity information of multiple links in the model.
+     *
+     *
+     * @param[in] jointPos the position of the joints of the model.
+     * @param[in] jointVel the velocities of the joints of the model.
+     * @param[in] jointAcc the accelerations of the joints of the model.
+     * @param[in] kinematicPropagationSubModels SubModelDecomposition of the model, for each subModel with index subModelIdx
+     *                                          its base link is the link for which the inertial measurements are given
+     * @param[in] linkInertialMeasurements Vector of frameInertialKinematicMeasurements, one for each base link of each
+     *                                     submodel in the kinematicPropagationSubModels.
+     * @return true if all went ok, false otherwise.
+     */
+    bool updateKinematicsFromMultipleFloatingBases(const JointPosDoubleArray  & jointPos,
+                                                   const JointDOFsDoubleArray & jointVel,
+                                                   const JointDOFsDoubleArray & jointAcc,
+                                                   const SubModelDecomposition& kinematicPropagationSubModels,
+                                                   std::vector<frameInertialKinematicMeasurements>& linkInertialMeasurements);
+
+    /**
      * \brief Predict FT sensors using the knoledge of external wrenches location.
      *
      * This function is used to estimate the expected measurement of the FT sensors.

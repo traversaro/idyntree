@@ -298,6 +298,46 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     return ok;
 }
 
+bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromMultipleFloatingBases(const JointPosDoubleArray &jointPos,
+                                                                                    const JointDOFsDoubleArray &jointVel,
+                                                                                    const JointDOFsDoubleArray& jointAcc,
+                                                                                    const SubModelDecomposition &kinematicPropagationSubModels,
+                                                                                    const std::vector<frameInertialKinematicMeasurements> &linkInertialMeasurements)
+{
+    if( !m_isModelValid )
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromMultipleFloatingBases","Model and sensors information not set.");
+        return false;
+    }
+
+    if (linkInertialMeasurements.size() == 0)
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromMultipleFloatingBases","Inertial measurements not specified.");
+        return false;
+    }
+
+    if (linkInertialMeasurements.size() != kinematicPropagationSubModels.getNrOfSubModels())
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromMultipleFloatingBases","Size mismatch between linkInertialMeasurements and kinematicPropagationSubModels.");
+        return false;
+    }
+
+    // For each submodel propagate the kinematic information
+    bool ok = true;
+    for (size_t subModelIdx=0; subModelIdx < kinematicPropagationSubModels.getNrOfSubModels(); subModelIdx++)
+    {
+        ok = ok && dynamicsEstimationForwardVelAccKinematics(m_model,kinematicPropagationSubModels.getTraversal(subModelIdx),
+                                                             linkInertialMeasurements[subModelIdx].properClassicalLinearAcceleration,
+                                                             linkInertialMeasurements[subModelIdx].angularVel,
+                                                             linkInertialMeasurements[subModelIdx].angularAcc,
+                                                             jointPos,jointVel,jointAcc,
+                                                             m_linkVels,m_linkProperAccs);
+    }
+
+    // Store joint positions
+    m_jointPos = jointPos;
+}
+
 bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(const LinkUnknownWrenchContacts& unknowns,
                                                                                      SensorsMeasurements& predictedMeasures,
                                                                                      LinkContactWrenches& estimatedContactWrenches,

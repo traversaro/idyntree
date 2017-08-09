@@ -268,6 +268,17 @@ struct estimateExternalWrenchesBuffers
 };
 
 /**
+  * Structure representing the kinematic information of a link that can be measured using
+  * inertial sensing, i.e. the linear mixed proper acceleration, the angular velocity and the angular acceleration.
+  */
+struct frameInertialKinematicMeasurements
+{
+    Vector3 properClassicalLinearAcceleration;
+    Vector3 angularVel;
+    Vector3 angularAcc;
+};
+
+/**
  * \brief Estimate the external contact wrenches using the MultiBody Newton-Euler equations.
  *
  * This function is used to estimate the external contacts forces **without** using any measurement
@@ -413,6 +424,11 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
                                           const LinkVelArray & linkVel,
                                           const LinkAccArray & linkProperAcc,
                                                 LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
+
+
+/**
+ *
+ */
 
 
 }
