@@ -18,8 +18,11 @@
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/ForwardKinematics.h>
 
 using namespace iDynTree;
 
@@ -186,11 +189,11 @@ void testInverseDynamics(KinDynComputations & dynComp)
         shapeAccs.zero();
         if( i < 6 )
         {
-            baseAcc(i) = 0.0;
+            baseAcc(i) = 1.0;
         }
         else
         {
-            shapeAccs(i-6) = 0.0;
+            shapeAccs(i-6) = 1.0;
         }
 
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
@@ -301,6 +304,190 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     dynComp.setFrameVelocityRepresentation(representation);
 }
 
+/// This helper functions have been copied from KinDynComputations, copied them in a more appropriate place
+typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+/**
+ * Function to convert a body fixed acceleration to a mixed acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The mixed acceleration
+ */
+Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyFixedAcc,
+                                                        const Twist & bodyFixedVel,
+                                                        const Rotation & inertial_R_body)
+{
+    Vector6 mixedAcceleration;
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<Eigen::Vector3d> linMixedAcc(mixedAcceleration.data());
+    Eigen::Map<Eigen::Vector3d> angMixedAcc(mixedAcceleration.data()+3);
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    // First we account for the effect of linear/angular velocity
+    linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
+
+    // Angular acceleration can be copied
+    angMixedAcc = inertial_R_body_eig*angMixedAcc;
+
+    return mixedAcceleration;
+}
+
+/**
+ * Function to convert mixed acceleration to body fixed acceleration
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertMixedAccelerationToBodyFixedAcceleration(const Vector6 & mixedAcc,
+                                                           const Twist & bodyFixedVel,
+                                                           const Rotation & inertial_R_body)
+{
+    SpatialAcc bodyFixedAcc;
+
+    Eigen::Map<const Eigen::Vector3d> linMixedAcc(mixedAcc.data());
+    Eigen::Map<const Eigen::Vector3d> angMixedAcc(mixedAcc.data()+3);
+
+    Eigen::Map<const Eigen::Vector3d> linBodyFixedTwist(bodyFixedVel.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angBodyFixedTwist(bodyFixedVel.getAngularVec3().data());
+
+    Eigen::Map<const Matrix3dRowMajor> inertial_R_body_eig(inertial_R_body.data());
+
+    Eigen::Map<Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
+
+    linBodyFixedAcc = inertial_R_body_eig.transpose()*linMixedAcc - angBodyFixedTwist.cross(linBodyFixedTwist);
+    angBodyFixedAcc = inertial_R_body_eig.transpose()*angMixedAcc;
+
+    return bodyFixedAcc;
+}
+
+/**
+ * Function to convert inertial acceleration to body acceleration.
+ *
+ * TODO refactor in a more general handling of conversion between the three
+ * derivative of frame velocities (inertial, body-fixed, mixed) and the sensors
+ * acceleration.
+ *
+ * @return The body fixed acceleration
+ */
+SpatialAcc convertInertialAccelerationToBodyFixedAcceleration(const Vector6 & inertialAcc,
+                                                              const Transform & inertial_H_body)
+{
+    SpatialAcc inertialAccProperForm;
+    fromEigen(inertialAccProperForm,toEigen(inertialAcc));
+    return inertial_H_body.inverse()*inertialAccProperForm;
+}
+
+void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
+{
+    const Model& model = dynComp.model();
+
+    LinkIndex link = real_random_int(0, dynComp.getNrOfLinks());
+
+    // Compute a random robot acceleration
+    Vector6 baseAcc;
+    getRandomVector(baseAcc);
+    baseAcc.zero();
+
+    JointDOFsDoubleArray jointAcc(6+dynComp.getNrOfDegreesOfFreedom());
+    getRandomVector(jointAcc);
+
+    // Convert
+    FreeFloatingAcc robotAcc(model);
+    robotAcc.jointAcc() = jointAcc;
+    Transform world_H_base;
+    JointPosDoubleArray jointPos(model);
+    Twist baseVel;
+    JointDOFsDoubleArray jointVel(model);
+    Vector3 gravity;
+
+    dynComp.getRobotState(world_H_base, jointPos, baseVel, jointVel, gravity);
+    FreeFloatingPos robotPos(model);
+    FreeFloatingVel robotVel(model);
+
+    robotPos.worldBasePos() = world_H_base;
+    robotPos.jointPos() = jointPos;
+    robotVel.jointVel() = jointVel;
+
+    if ( dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION )
+    {
+        robotVel.baseVel() = world_H_base.inverse()*baseVel;
+        robotAcc.baseAcc() = convertInertialAccelerationToBodyFixedAcceleration(baseAcc, world_H_base);
+    }
+    else if (dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION)
+    {
+        robotVel.baseVel() = world_H_base.getRotation().inverse()*baseVel;
+        robotAcc.baseAcc() = convertMixedAccelerationToBodyFixedAcceleration(baseAcc, world_H_base.inverse()*baseVel, world_H_base.getRotation());
+    }
+    else
+    {
+        assert(dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION);
+        robotVel.baseVel() = baseVel;
+        robotAcc.baseAcc() = SpatialAcc(LinearMotionVector3(baseAcc(0),baseAcc(1),baseAcc(2)),
+                                        AngularMotionVector3(baseAcc(3),baseAcc(4),baseAcc(5)));
+    }
+
+    // Compute the left-trivialized acceleration of the frame using forward kinematics
+    Traversal traversal;
+    dynComp.model().computeFullTreeTraversal(traversal, dynComp.model().getLinkIndex(dynComp.getFloatingBase()));
+    LinkVelArray linkVels(model);
+    LinkAccArray linkAccs(model);
+    ForwardVelAccKinematics(dynComp.model(), traversal, robotPos, robotVel, robotAcc, linkVels, linkAccs);
+
+    // Compute the link acceleration back to the original reppresentation
+    Vector6 linkAcc;
+    linkAcc.zero();
+
+    if (dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION)
+    {
+        linkAcc = linkAccs(link).asVector();
+    }
+    else
+    {
+        // To convert the twist to a mixed or inertial representation, we need world_H_frame
+        Transform world_H_link = dynComp.getWorldTransform(link);
+
+        if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION )
+        {
+            linkAcc = (world_H_link*linkAccs(link)).asVector();
+        }
+        else
+        {
+            // In the mixed case, we need to account for the non-vanishing term related to the
+            // derivative of the transform between mixed and body representation
+            assert(dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION);
+            linkAcc = convertBodyFixedAccelerationToMixedAcceleration(linkAccs(link), linkVels(link),world_H_link.getRotation());
+        }
+    }
+
+    // Compute absolute jacobian
+    iDynTree::FrameFreeFloatingJacobian absJac(model);
+    dynComp.getFrameFreeFloatingJacobian(link, absJac);
+
+    // Compute bias acc
+    Vector6 biasAcc = dynComp.getFrameBiasAcc(link);
+
+    // Check that the acceleration are consistent
+    Vector6 linkAccCheck;
+    toEigen(linkAccCheck) = toEigen(absJac).block<6,6>(0,0)*toEigen(baseAcc) + toEigen(absJac).block(0,6,6,model.getNrOfDOFs())*toEigen(jointAcc) + toEigen(biasAcc);
+
+    ASSERT_EQUAL_VECTOR(linkAcc, linkAccCheck);
+
+    return;
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -318,6 +505,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
+        testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
     }
 
 }
