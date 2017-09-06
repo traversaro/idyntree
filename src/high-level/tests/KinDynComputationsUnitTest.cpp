@@ -51,9 +51,9 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
 
-    worldTbase = //iDynTree::Transform::Identity();
-    iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
-            Position(random_double(),random_double(),random_double()));
+    worldTbase = iDynTree::Transform::Identity();
+    //iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
+    //        Position(random_double(),random_double(),random_double()));
 
     for(int i=0; i < 3; i++)
     {
@@ -304,6 +304,28 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     dynComp.setFrameVelocityRepresentation(representation);
 }
 
+void testFrameBiasAcc(KinDynComputations & dynComp)
+{
+    // Select random frame
+    FrameIndex frameIndex = real_random_int(0, dynComp.getNrOfLinks());
+
+    // Compute FrameBiasAcc
+    Vector6 frameBiasAcc = dynComp.getFrameBiasAcc(frameIndex);
+
+    // Compute abs jacobian
+    FrameFreeFloatingJacobian absJacobian(dynComp.model());
+    dynComp.getFrameFreeFloatingJacobian(frameIndex, absJacobian);
+
+    VectorDynSize jointVel;
+    dynComp.getJointVel(jointVel);
+    Vector6 frameBiasAccCheck;
+    toEigen(frameBiasAccCheck) = toEigen(absJacobian)*toEigen(dynComp.getBaseTwist().asVector(), jointVel);
+
+    ASSERT_EQUAL_VECTOR(frameBiasAcc, frameBiasAccCheck);
+
+    return;
+}
+
 /// This helper functions have been copied from KinDynComputations, copied them in a more appropriate place
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 /**
@@ -320,6 +342,7 @@ Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyF
                                                         const Rotation & inertial_R_body)
 {
     Vector6 mixedAcceleration;
+    mixedAcceleration(0) = mixedAcceleration(1) = mixedAcceleration(2) = mixedAcceleration(3) = mixedAcceleration(4) = mixedAcceleration(5) = nan("");
 
     Eigen::Map<const Eigen::Vector3d> linBodyFixedAcc(bodyFixedAcc.getLinearVec3().data());
     Eigen::Map<const Eigen::Vector3d> angBodyFixedAcc(bodyFixedAcc.getAngularVec3().data());
@@ -336,7 +359,7 @@ Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyF
     linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
 
     // Angular acceleration can be copied
-    angMixedAcc = inertial_R_body_eig*angMixedAcc;
+    angMixedAcc = inertial_R_body_eig*angBodyFixedAcc;
 
     return mixedAcceleration;
 }
@@ -401,7 +424,7 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     getRandomVector(baseAcc);
     baseAcc.zero();
 
-    JointDOFsDoubleArray jointAcc(6+dynComp.getNrOfDegreesOfFreedom());
+    JointDOFsDoubleArray jointAcc(model);
     getRandomVector(jointAcc);
 
     // Convert
@@ -414,6 +437,7 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     Vector3 gravity;
 
     dynComp.getRobotState(world_H_base, jointPos, baseVel, jointVel, gravity);
+
     FreeFloatingPos robotPos(model);
     FreeFloatingVel robotVel(model);
 
@@ -444,7 +468,8 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     dynComp.model().computeFullTreeTraversal(traversal, dynComp.model().getLinkIndex(dynComp.getFloatingBase()));
     LinkVelArray linkVels(model);
     LinkAccArray linkAccs(model);
-    ForwardVelAccKinematics(dynComp.model(), traversal, robotPos, robotVel, robotAcc, linkVels, linkAccs);
+    bool ok = ForwardVelAccKinematics(dynComp.model(), traversal, robotPos, robotVel, robotAcc, linkVels, linkAccs);
+    ASSERT_IS_TRUE(ok);
 
     // Compute the link acceleration back to the original reppresentation
     Vector6 linkAcc;
@@ -468,7 +493,11 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
             // In the mixed case, we need to account for the non-vanishing term related to the
             // derivative of the transform between mixed and body representation
             assert(dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION);
+            std::cerr << linkAccs(link).toString() << std::endl;
+            std::cerr << linkVels(link).toString() << std::endl;
+            std::cerr << world_H_link.toString() << std::endl;
             linkAcc = convertBodyFixedAccelerationToMixedAcceleration(linkAccs(link), linkVels(link),world_H_link.getRotation());
+            std::cerr << linkAcc.toString() << std::endl;
         }
     }
 
@@ -479,9 +508,20 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     // Compute bias acc
     Vector6 biasAcc = dynComp.getFrameBiasAcc(link);
 
+    std::cerr << "linkAcc (mixed) " << linkAcc.toString() << std::endl;
+    std::cerr << "biasAcc (mixed)" << biasAcc.toString() << std::endl;
+    std::cerr << "baseAcc " << baseAcc.toString() << std::endl;
+    std::cerr << "absJac  " << absJac.toString() << std::endl;
+
     // Check that the acceleration are consistent
     Vector6 linkAccCheck;
-    toEigen(linkAccCheck) = toEigen(absJac).block<6,6>(0,0)*toEigen(baseAcc) + toEigen(absJac).block(0,6,6,model.getNrOfDOFs())*toEigen(jointAcc) + toEigen(biasAcc);
+    linkAccCheck.zero();
+    std::cerr << "absJac rows " << toEigen(absJac).rows() << " absJAc cols " << toEigen(absJac).cols() << std::endl;
+    toEigen(linkAccCheck) = toEigen(absJac).block<6,6>(0,0)*toEigen(baseAcc) + toEigen(biasAcc);
+    if (model.getNrOfDOFs() > 0)
+    {
+        toEigen(linkAccCheck) += toEigen(absJac).block(0,6,6,model.getNrOfDOFs())*toEigen(jointAcc);
+    }
 
     ASSERT_EQUAL_VECTOR(linkAcc, linkAccCheck);
 
@@ -505,7 +545,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
-        testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
+        testFrameBiasAcc(dynComp);
     }
 
 }
@@ -515,9 +555,11 @@ int main()
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
-        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) <<  std::endl;
+        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) << " with MIXED_REPRESENTATION " <<  std::endl;
         testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) << " with BODY_FIXED_REPRESENTATION " <<  std::endl;
         testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+        std::cout << "Testing file " << std::string(IDYNTREE_TESTS_URDFS[mdl]) << " with INERTIAL_FIXED_REPRESENTATION " <<  std::endl;
         testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
     }
 

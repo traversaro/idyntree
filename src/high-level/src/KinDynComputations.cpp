@@ -1101,7 +1101,7 @@ Vector6 convertBodyFixedAccelerationToMixedAcceleration(const SpatialAcc & bodyF
     linMixedAcc = inertial_R_body_eig*(linBodyFixedAcc + angBodyFixedTwist.cross(linBodyFixedTwist));
 
     // Angular acceleration can be copied
-    angMixedAcc = inertial_R_body_eig*angMixedAcc;
+    angMixedAcc = inertial_R_body_eig*angBodyFixedAcc;
 
     return mixedAcceleration;
 }
@@ -1179,7 +1179,6 @@ Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)
     // In body fixed and inertial representation, we can transform the bias acceleration with just a adjoint
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-
         return bias_acc_frame_body_fixed.asVector();
     }
     else
@@ -1196,6 +1195,9 @@ Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)
             // In the mixed case, we need to account for the non-vanishing term related to the
             // derivative of the transform between mixed and body representation
             assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+            std::cerr << "getFrameBiasAcc " << std::endl;
+            std::cerr << "bias_acc_frame_body_fixed " << bias_acc_frame_body_fixed.toString() << std::endl;
+            std::cerr << "vel_frame_body_fixed " << vel_frame_body_fixed.toString() << std::endl;
             return convertBodyFixedAccelerationToMixedAcceleration(bias_acc_frame_body_fixed,vel_frame_body_fixed,world_H_frame.getRotation());
         }
     }
