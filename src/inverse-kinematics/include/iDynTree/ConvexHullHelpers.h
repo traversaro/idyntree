@@ -116,6 +116,22 @@ namespace iDynTree
 
         Vector2& operator()(const size_t idx);
         const Vector2 & operator()(const size_t idx) const;
+
+        /**
+         * Compute an inward offsetted polygon using a simple algorithm, that only works for convex polygons.
+         *
+         * This routine computes the inward offsetted polygon of the current polygon.
+         * The algorithm implementation is simple, and only works if:
+         *  * The polygon is convex,
+         *  * The offsetted polygon has the same number of vertices of the original polygon.
+         *
+         *  See https://stackoverflow.com/questions/1109536/an-algorithm-for-inflating-deflating-offsetting-buffering-polygons
+         *  for the general problem, that is not addressed by this method.
+         *
+         *  @param[in]
+         *  @return true if everything works correctly, false otherwise.
+         */
+         bool computeSimpleInwardOffsetOfConvexPolygon(Polygon2D offsetPolygon);
     };
 
     /**

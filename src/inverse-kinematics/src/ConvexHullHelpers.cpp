@@ -101,6 +101,35 @@ namespace iDynTree
         return m_vertices[idx];
     }
 
+    bool Polygon2D::computeSimpleInwardOffsetOfConvexPolygon(Polygon2D offsetPolygon)
+    {
+        // Clear output polygon
+        offsetPolygon.setNrOfVertices(0);
+
+        // Create a copy of the input polygon to make sure that the vertex are in the right order
+        Polygon2D inputPolygon = *this;
+
+        // Order the projected points with a lexographical ordering
+        struct
+        {
+            bool operator()(Vector2 a, Vector2 b)
+            {
+                return (a(0) < b(0)) || ( (a(0) == b(0)) && (a(1) < b(1)) );
+            }
+        } vector2lexographical;
+
+        std::sort(inputPolygon.m_vertices.begin(), inputPolygon.m_vertices.end(), vector2lexographical);
+
+        // Iterate over the segments of the polygon
+        for (int i = 0; i < inputPolygon.m_vertices.size()-1; ++i)
+        {
+            // for each i, we consider the segment connecting vertex i and i+1
+
+        }
+
+        return false;
+    }
+
     double monotono_chain_cross(Vector2 o, Vector2 a, Vector2 b)
     {
         return ((a(0)-o(0))*(b(1)-o(1))-(a(1)-o(1))*(b(0)-o(0)));
