@@ -277,7 +277,7 @@ namespace iDynTree {
         element->parsedCharacters(parsedString);
     }
 
-    void XMLParser::XMLParserPimpl::parserErrorMessageCallback(void */*context*/,
+    void XMLParser::XMLParserPimpl::parserErrorMessageCallback(void * /*context*/,
                                                                const char * message, ...)
     {
         va_list arguments;
@@ -287,7 +287,7 @@ namespace iDynTree {
         reportError("XMLParser", "[Parsing]", errorMessage.c_str());
     }
 
-    void XMLParser::XMLParserPimpl::parserWarningMessageCallback(void */*context*/,
+    void XMLParser::XMLParserPimpl::parserWarningMessageCallback(void * /*context*/,
                                                                const char * message, ...)
     {
         va_list arguments;
