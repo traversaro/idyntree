@@ -14,6 +14,7 @@
 #define IDYNTREE_MODELIO_XML_XMLDOCUMENT_H
 
 #include <memory>
+#include <string>
 
 namespace iDynTree {
     class XMLDocument;
