@@ -14,7 +14,8 @@ install:
   - ps: Start-FileDownload https://github.com/robotology-playground/robotology-additional-dependencies/releases/download/v0.1.0/robotology-additional-dependencies-0.1.0-v14-x86.zip -FileName c:\projects\rad.zip -Timeout 300000
   - ps: Expand-Archive c:\projects\rad.zip -DestinationPath c:\projects\rad
   # Update env variables 
-  - ps: powershell -File c:\projects\rad\robotology-additional-dependencies-0.3.0-x86\x86-windows\addPathsToEnvVariables.ps1
+  - ps: powershell -File c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\addPathsToEnvVariables.ps1
+  - ps: Write-Host "CMAKE_PREFIX_PATH: " + $Env:CMAKE_PREFIX_PATH 
 
 build:
 
