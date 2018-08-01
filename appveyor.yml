@@ -15,7 +15,7 @@ install:
   - ps: Expand-Archive c:\projects\rad.zip -DestinationPath c:\projects\rad
   # Update env variables 
   - ps: powershell -File c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\addPathsToEnvVariables.ps1
-  - cmd: echo CMAKE_PREFIX_PATH: %CMAKE_PREFIX_PATH%
+  - cmd: echo CMAKE_PREFIX_PATH %CMAKE_PREFIX_PATH%
 build:
 
 build_script:
