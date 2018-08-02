@@ -16,8 +16,8 @@ install:
   - ps: Expand-Archive c:\projects\rad.zip -DestinationPath c:\projects\rad
   # Check env variables 
   - cmd: echo CMAKE_PREFIX_PATH %CMAKE_PREFIX_PATH%
-  - cmd: set PATH=%PATH%;%APPVEYOR_BUILD_FOLDER%\build\bin\%CONFIGURATION%
-  - cmd: echo PATH %PATH%;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\bin;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\debug\bin
+  - cmd: set PATH=%PATH%;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\bin;c:\projects\rad\robotology-additional-dependencies-0.1.0-x86\x86-windows\debug\bin
+  - cmd: echo PATH %PATH%
 build:
 
 build_script:
