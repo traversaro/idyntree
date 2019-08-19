@@ -703,6 +703,26 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
     return LINK_INVALID_INDEX;
 }
 
+bool Model::getLinkAdditionalFrames(const LinkIndex lnkIndex, std::vector<FrameIndex>& frameIndices) const
+{
+    if (!isValidLinkIndex(lnkIndex)) {
+        std::stringstream ss;
+        ss << "LinkIndex " << lnkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
+        reportError("Model", "getLinkAdditionalFrames", ss.str().c_str());
+        return false;
+    }
+
+    frameIndices.resize(0);
+    for (FrameIndex frameIndex=this->getNrOfLinks(); frameIndex < this->getNrOfFrames(); frameIndex++) {
+        if (this->getFrameLink(frameIndex) == lnkIndex) {
+            frameIndices.push_back(frameIndex);
+        }
+    }
+
+    return true;
+}
+
+
 
 unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {
