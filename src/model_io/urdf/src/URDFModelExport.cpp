@@ -30,6 +30,15 @@ namespace iDynTree
 {
 
 /*
+ * This file uses extensivly the libxml2's tree API, see
+ * http://www.xmlsoft.org/examples/index.html#Tree for more info.
+ * Usage of the C-based libxml2 API in C++ means that is necessary to
+ * use the BAD_CAST macro for handling const-correctness.
+ * See https://stackoverflow.com/questions/45058878/why-libxml2-uses-bad-cast-everywhere-in-a-c-c-code
+ * and http://www.xmlsoft.org/html/libxml-xmlstring.html#BAD_CAST for details on this.
+ */
+
+/*
  * Add a <origin> URDF element to the specified parent element with the specified transform.
  *
  * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
