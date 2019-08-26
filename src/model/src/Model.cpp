@@ -713,6 +713,9 @@ bool Model::getLinkAdditionalFrames(const LinkIndex lnkIndex, std::vector<FrameI
     }
 
     frameIndices.resize(0);
+    // FrameIndex from 0 to this->getNrOfLinks()-1 are reserved for implicit frame of Links
+    // with the corresponding LinkIndex, while the frameIndex from getNrOfLinks() to getNrOfFrames()-1
+    // are the one of actual additional frames. See iDynTree::Model docs for more details
     for (FrameIndex frameIndex=this->getNrOfLinks(); frameIndex < this->getNrOfFrames(); frameIndex++) {
         if (this->getFrameLink(frameIndex) == lnkIndex) {
             frameIndices.push_back(frameIndex);
