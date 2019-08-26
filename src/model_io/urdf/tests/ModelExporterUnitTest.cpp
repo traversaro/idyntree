@@ -59,10 +59,6 @@ void checkImportExportURDF(std::string fileName)
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), modelReloaded.getNrOfDOFs());
     ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(), modelReloaded.getNrOfFrames());
 
-
-    // TODO(traversaro) : uncomment the following line when frames are correctly handled by the exporter
-    // ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(), modelReloaded.getNrOfLinks());
-
     // Verify that the link correspond (note that the serialization could have changed)
     for(int lnkIndex=0; lnkIndex < model.getNrOfLinks(); lnkIndex++) {
         LinkIndex lnkIndexInReloaded = modelReloaded.getLinkIndex(model.getLinkName(lnkIndex));
