@@ -199,6 +199,7 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapeType type, x
         xmlNodePtr mesh_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "mesh", NULL);
 
         // Export filename attribute
+        std::cerr << "~~~> Mesh filename " << mesh->filename << std::endl;
         xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->filename.c_str());
 
         // Export scale attribute
@@ -211,8 +212,6 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapeType type, x
                   <<  typeid(solidShape).name() << " to a URDF geometry." << std::endl;
         return false;
     }
-
-    return ok;
 
     return ok;
 }
@@ -466,11 +465,12 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     }
 
     // If the base link has at least an additional frame, add it as parent URDF link
-    // as a workaround for https://github.com/ros/kdl_parser/issues/27
+    // as a workaround for https://github.com/ros/kdl_parser/issues/27, unless
+    // options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase is set to false
     FrameIndex baseFakeLinkFrameIndex = FRAME_INVALID_INDEX;
     std::vector<FrameIndex> frameIndices;
     ok = model.getLinkAdditionalFrames(baseLinkIndex, frameIndices);
-    if (ok && frameIndices.size() >= 1) {
+    if (ok && frameIndices.size() >= 1 && options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase) {
         baseFakeLinkFrameIndex = frameIndices[0];
         ok = ok && exportAdditionalFrame(model.getFrameName(baseFakeLinkFrameIndex),
                                          model.getFrameTransform(baseFakeLinkFrameIndex),
