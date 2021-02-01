@@ -29,6 +29,7 @@ jobs:
         - name: Verify which SWIG is found 
           run: |
             which swig
+            swig --help
 
         - name: Configure and compile iDynTree
           run: |
