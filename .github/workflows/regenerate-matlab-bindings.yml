@@ -22,7 +22,7 @@ jobs:
             cd swig
             git checkout matlab
             sh autogen.sh
-            ./configure
+            ./configure --with-matlab
             make 
             sudo make install
 
