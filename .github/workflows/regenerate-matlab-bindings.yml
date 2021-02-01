@@ -47,7 +47,7 @@ jobs:
           id: cpr
           uses: peter-evans/create-pull-request@v3
           with:
-            commit-message: [bindings] update matlab bindings
+            commit-message: '[bindings] update matlab bindings'
             committer: GitHub <noreply@github.com>
             branch: regenerate-matlab-bindings
             delete-branch: true
