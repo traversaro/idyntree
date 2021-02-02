@@ -16,8 +16,7 @@ jobs:
 
         - name: Install SWIG for that supports MATLAB
           run: |
-            sudo apt-get remove swig
-            sudo apt-get install liboctave-dev
+            sudo apt-get remove swig swig-4.0
             git clone https://github.com/robotology-dependencies/swig/
             cd swig
             git checkout matlab
