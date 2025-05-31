@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ITexture" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ITexture</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1ac4e52617fb0edd794088135b4a073332" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::ITexture::~ITexture</definition>
+        <argsstring>()=0</argsstring>
+        <name>~ITexture</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="851" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1acc2e8c7c5e02bf901b7df10c4b7d1af3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1IEnvironment" kindref="compound">IEnvironment</ref> &amp;</type>
+        <definition>virtual IEnvironment&amp; iDynTree::ITexture::environment</definition>
+        <argsstring>()=0</argsstring>
+        <name>environment</name>
+        <briefdescription>
+<para>Return an interface to manipulate the texture environment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="856" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1ad2c45cf8667d339d91567bfd58c33471" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
+        <definition>virtual ColorViz iDynTree::ITexture::getPixelColor</definition>
+        <argsstring>(unsigned int width, unsigned int height) const =0</argsstring>
+        <name>getPixelColor</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Get the color of the pixel at the given position in the additional texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Remember to call draw() first. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The width of the pixel </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The height of the pixel </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The color of the pixel </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="866" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1accfd16dd44c6bb16c076398081965bce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::ITexture::getPixels</definition>
+        <argsstring>(std::vector&lt; PixelViz &gt; &amp;pixels) const =0</argsstring>
+        <name>getPixels</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1PixelViz" kindref="compound">PixelViz</ref> &gt; &amp;</type>
+          <declname>pixels</declname>
+        </param>
+        <briefdescription>
+<para>Get the pixels of the texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Remember to call draw() first. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pixels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output pixels. The size of the vector will be equal to the total number of pixels of the rendered texture, i.e. width of the texture times its height. Both these two parameters can be set in the textureOptions passed to the method <ref refid="classiDynTree_1_1ITexturesHandler_1a24295be20a80e131edb753f3c8028524" kindref="member">ITexturesHandler::add</ref>. The pixels are saved in col-major format. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This operation may affect the time performances of the visualizer, especially if the texture is large. </para>
+</simplesect>
+<simplesect kind="return"><para>True in case of success, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="879" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1a54b05365c8136ec72b76bac964d3b403" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::ITexture::drawToFile</definition>
+        <argsstring>(const std::string filename=&quot;iDynTreeVisualizerTextureScreenshot.png&quot;) const =0</argsstring>
+        <name>drawToFile</name>
+        <param>
+          <type>const std::string</type>
+          <declname>filename</declname>
+          <defval>&quot;iDynTreeVisualizerTextureScreenshot.png&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Draw the current texture to a image file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The format of the image is desumed from the filename.</para>
+<para>For more info on the process of writing the image, check irr::video::IVideoDriver::writeImageToFile irrlicht method.</para>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="891" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1ac37428ca8f11fb8fa749f2cddb328c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ITexture::enableDraw</definition>
+        <argsstring>(bool enabled=true)=0</argsstring>
+        <name>enableDraw</name>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Enable/disable the drawing on the texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true (default), the visualizer will draw on the texture when calling draw(); </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="897" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1acd258bc165fe99ed6fe987ed2aab682d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int iDynTree::ITexture::width</definition>
+        <argsstring>() const =0</argsstring>
+        <name>width</name>
+        <briefdescription>
+<para>Get the texture width. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="902" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1a92644f4603752dccf3188b6de6b26288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int iDynTree::ITexture::height</definition>
+        <argsstring>() const =0</argsstring>
+        <name>height</name>
+        <briefdescription>
+<para>Get the texture height. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="907" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexture_1aabd49737df8e97ee6e76c7f96ce41950" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::ITexture::setSubDrawArea</definition>
+        <argsstring>(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)=0</argsstring>
+        <name>setSubDrawArea</name>
+        <param>
+          <type>int</type>
+          <declname>xOffsetFromTopLeft</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>yOffsetFromTopLeft</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>subImageWidth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>subImageHeight</declname>
+        </param>
+        <briefdescription>
+<para>Set the area used for drawing operations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The entirety of the texture is cleared between two draw() calls. Use this in conjunction with subDraw() to draw on different parts of the same texture. Use call it with (0, 0, <ref refid="classiDynTree_1_1ITexture_1acd258bc165fe99ed6fe987ed2aab682d" kindref="member">width()</ref>, <ref refid="classiDynTree_1_1ITexture_1a92644f4603752dccf3188b6de6b26288" kindref="member">height()</ref>) to draw on the full texture (this is done by default). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="914" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The interface for an object that can be used as an additional target for the renderer. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This allows rendering the scene using dimensions and environment that are different from the main window. The camera is in common. Any camera change in the main window is also reflected in the other textures. </para>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="844" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="845" bodyend="916"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ITexture_1a54b05365c8136ec72b76bac964d3b403" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>drawToFile</name></member>
+      <member refid="classiDynTree_1_1ITexture_1ac37428ca8f11fb8fa749f2cddb328c7a" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>enableDraw</name></member>
+      <member refid="classiDynTree_1_1ITexture_1acc2e8c7c5e02bf901b7df10c4b7d1af3" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>environment</name></member>
+      <member refid="classiDynTree_1_1ITexture_1ad2c45cf8667d339d91567bfd58c33471" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>getPixelColor</name></member>
+      <member refid="classiDynTree_1_1ITexture_1accfd16dd44c6bb16c076398081965bce" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>getPixels</name></member>
+      <member refid="classiDynTree_1_1ITexture_1a92644f4603752dccf3188b6de6b26288" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>height</name></member>
+      <member refid="classiDynTree_1_1ITexture_1aabd49737df8e97ee6e76c7f96ce41950" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>setSubDrawArea</name></member>
+      <member refid="classiDynTree_1_1ITexture_1acd258bc165fe99ed6fe987ed2aab682d" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>width</name></member>
+      <member refid="classiDynTree_1_1ITexture_1ac4e52617fb0edd794088135b4a073332" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>~ITexture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

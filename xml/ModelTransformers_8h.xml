@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelTransformers_8h" kind="file" language="C++">
+    <compoundname>ModelTransformers.h</compoundname>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="Model_2ModelTransformers_8h" local="no">iDynTree/Model/ModelTransformers.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/ModelTransformers.h</label>
+        <link refid="ModelTransformers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::removeFakeLinks</definition>
+        <argsstring>(const Model &amp;modelWithFakeLinks, Model &amp;modelWithoutFakeLinks)</argsstring>
+        <name>removeFakeLinks</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>modelWithFakeLinks</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>modelWithoutFakeLinks</declname>
+        </param>
+        <briefdescription>
+<para>\function Remove all fake links in the model, transforming them in frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> in input, this function copies all its links and joints to the model in output, except for links that recognized as &quot;fake links&quot;.</para>
+<para>The condition for a link to be classified as &quot;fake link&quot; are:<itemizedlist>
+<listitem><para>The link has a zero mass.</para>
+</listitem><listitem><para>The link is a leaf, i.e. it is connected to only one neighbor.</para>
+</listitem><listitem><para>The link is connected to its only neighbor with a fixed joint.</para>
+</listitem></itemizedlist>
+</para>
+<para>Once a &quot;fake link&quot; has been identified to respect this two conditions, it and the joint that it connects it to its only neighbor is not copied to the output model, but a frame with the same name of the &quot;fake link&quot; and with the same transform is added to the model.</para>
+<para><simplesect kind="warning"><para>This function does not handle <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> contained inside the input model.</para>
+</simplesect>
+<simplesect kind="note"><para>The definition of &quot;fake link&quot; used in this function excludes the case in which two fake links are attached to one another. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="50" column="6" declfile="iDynTree/ModelTransformers.h" declline="50" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createReducedModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel)</argsstring>
+        <name>createReducedModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jointsInReducedModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <briefdescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints). The links eliminated with this process are be added back to the reduced model as &quot;frames&quot;, and are copied in the same way all the additional frames of the lumped links. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="65" column="6" declfile="iDynTree/ModelTransformers.h" declline="65" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createReducedModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions)</argsstring>
+        <name>createReducedModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jointsInReducedModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <declname>removedJointPositions</declname>
+        </param>
+        <briefdescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="80" column="6" declfile="iDynTree/ModelTransformers.h" declline="80" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createModelWithNormalizedJointNumbering</definition>
+        <argsstring>(const Model &amp;model, const std::string &amp;baseForNormalizedJointNumbering, Model &amp;reducedModel)</argsstring>
+        <name>createModelWithNormalizedJointNumbering</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>baseForNormalizedJointNumbering</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <briefdescription>
+<para>Given a specified base, return a model with a &quot;normalized&quot; joint numbering for that base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and a name of a link in that model. It returns a model identical to the one in input, but with the joint serialization of the non-fixed joint modified in such a way that a non-fixed joint has an index higher than all the non-fixed joints on the path between it and the base. After all the non-fixed joints, the fixed joints are also added with the same criteria, but applied to fixed joints.</para>
+<para><simplesect kind="note"><para>This method make sure that the non-fixed joint in the model have a &quot;regular numbering&quot; as described in Featherstone &quot;Rigid Body Dynamics Algorithm&quot;, section 4.1.2 . Note that this numbering is not required by any algorithm in iDynTree, but it may be useful for example to ensure that for a chain model the joint numbering is the one induced by the kinematic structure.</para>
+</simplesect>
+<simplesect kind="warning"><para>This function does not handle <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> contained inside the input model.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went well, false if there was an error in conversion. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="104" column="6" declfile="iDynTree/ModelTransformers.h" declline="104" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::extractSubModel</definition>
+        <argsstring>(const iDynTree::Model &amp;fullModel, const iDynTree::Traversal &amp;subModelTraversal, iDynTree::Model &amp;outputSubModel)</argsstring>
+        <name>extractSubModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>subModelTraversal</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>outputSubModel</declname>
+        </param>
+        <briefdescription>
+<para>Extract sub model from sub model traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates a new <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> containing links and joints composing the subModelTraversal. The function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and a <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref>. The new model will contain joints and links composing the subModelTraversal, with the same order. The FT sensor frames are added as additional frames.</para>
+<para><simplesect kind="warning"><para>This function does not handle <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> contained inside the input model.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went well, false if there was an error in creating the sub model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="122" column="6" declfile="iDynTree/ModelTransformers.h" declline="122" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::addValidNamesToAllSolidShapes</definition>
+        <argsstring>(const iDynTree::Model &amp;inputModel, iDynTree::Model &amp;outputModel)</argsstring>
+        <name>addValidNamesToAllSolidShapes</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <briefdescription>
+<para>Add automatically generated names to all visual and collision solid shapes of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates a new <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> that is identical to the input one, but that sets a valid name for all the visual and collision solid shapes of the model.</para>
+<para>For links that already have at least either collision or visual with valid name, <bold>all</bold> the corresponding shapes (collision or visual) will not be modified.</para>
+<para>For links in which all shapes of a given type that do not have a valid name, a name will be generated as the following:<itemizedlist>
+<listitem><para>If there is a single collision or visual element in the link, it will be named &lt;linkName&gt;_collision or &lt;linkName&gt;_visual</para>
+</listitem><listitem><para>If there are multiple collision or visual elements in the link, the solid shapes will be &lt;linkName&gt;_collision_0, &lt;linkName&gt;_collision_1, ... &lt;linkName&gt;_collision_n or &lt;linkName&gt;_visual_0, &lt;linkName&gt;_visual_1, ... &lt;linkName&gt;_visual_n</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="return"><para>true if all went well, false if there was an error in creating the sub model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="145" column="6" declfile="iDynTree/ModelTransformers.h" declline="145" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a133a097cc3ef37982c00cdd729829118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</definition>
+        <argsstring>(const iDynTree::Model &amp;inputModel, iDynTree::Model &amp;outputModel)</argsstring>
+        <name>moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> the input model in model that can be exported as URDF with the given base link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In iDynTree, the link frame can be placed without constraint w.r.t. to the joints to which the link is connected. On the other hand, in the URDF format, the origin of the frame of the child link connected to its parent with a non-fixed joint <bold>must</bold> lay on the axis of the joint.</para>
+<para>That means that if you want to export a model with an arbitrary base link, some link frame will need to be moved to respect the constraint given by the URDF format. This function perform exactly this transformation, ensuring that inertia, visual and collision information is probably accounted for, and leaving the original link frames in the model as &quot;additional frames&quot; with the naming scheme &lt;linkName&gt;_original_frame .</para>
+<para>Note that the operation done depends on the base link used, if you want to use a different base link, change the default base link of the model via inputModel.setDefaultBaseLink method.</para>
+<para><simplesect kind="return"><para>true if all went well, false if there was an error in creating the sub model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="166" column="6" declfile="iDynTree/ModelTransformers.h" declline="166" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a9a8fd1db7c7bbfb060362056a4ec65ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::removeAdditionalFramesFromModel</definition>
+        <argsstring>(const Model &amp;modelWithAllAdditionalFrames, Model &amp;modelWithOnlyAllowedAdditionalFrames, const std::vector&lt; std::string &gt; allowedAdditionalFrames=std::vector&lt; std::string &gt;())</argsstring>
+        <name>removeAdditionalFramesFromModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>modelWithAllAdditionalFrames</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>modelWithOnlyAllowedAdditionalFrames</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt;</type>
+          <declname>allowedAdditionalFrames</declname>
+          <defval>std::vector&lt; std::string &gt;()</defval>
+        </param>
+        <briefdescription>
+<para>\function Remove all additional frames from the model, except a specified allowlist. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a model, and return a model with all the additional frame list removed, except for the additional frames whose name is specified in the specified allowlist.</para>
+<para><simplesect kind="note"><para>The main use of this function is for processing models that need to be passed to other libraries or physics engines, where the additional frames may create problems or create performance problem. As long as you are using iDynTree, the presence of additional frames does not impact the performance of kinematics or dynamics algorithms, so there is no need to call this function to remove the additional frames.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went well, false if there was an error. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="186" column="6" declfile="iDynTree/ModelTransformers.h" declline="186" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Collection of function to modify model in various ways. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>In this file a series of functions for transforming Model objects are provided </para>
+    </detaileddescription>
+    <location file="iDynTree/ModelTransformers.h"/>
+  </compounddef>
+</doxygen>
